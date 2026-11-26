@@ -136,7 +136,7 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 - [ ] Impostare `FAMILY_CODE` su Vercel e inserire lo stesso codice sui due telefoni.
 - [x] Modificare una canzone dalla lista.
 - [ ] Eliminare una canzone (con la sync serve una "lapide": segnarla come eliminata, non toglierla).
-- [ ] Verificare la sync vera tra i due telefoni dopo il fix del 2026-11-27.
+- [x] Sync verificata tra i due telefoni (2026-11-27): pallino verde.
 - [ ] Assegnare i mood alle canzoni importate (da Notion arriva solo "Di gruppo").
 - [ ] Sistemare i refusi nei titoli/artisti presi da Notion (es. "Che to dico a fa",
       "Ossesione", "Comacose", "Boombadash", "Malika Ayanne"): importati tali e quali.
