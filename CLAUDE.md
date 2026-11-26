@@ -5,6 +5,20 @@
 > **Regola:** ogni volta che si prende una decisione nuova (design, funzionalità,
 > tecnologia), aggiornare questo file nella stessa sessione, così resta sempre attuale.
 
+## Come resta aggiornata questa memoria
+La fonte unica è questo file su GitHub (`EsterAlyssa/KaraokeApp`, branch `main`).
+Ci si lavora da più posti: il computer (Claude Code / Cowork sulla cartella
+`C:\Users\eadin\Desktop\KaraokeApp`) e il telefono (Claude Code sul web, che clona
+il repository) anche quando il computer è spento.
+
+- **All'inizio di ogni sessione:** `git pull` per prendere le modifiche fatte altrove.
+- **Dopo ogni modifica a questo file** (o al codice): commit e **push subito**, nella
+  stessa sessione. Una modifica non pushata non esiste per gli altri dispositivi.
+- Non tenere decisioni in memorie separate (note del progetto, memorie locali):
+  vanno scritte qui.
+- In caso di conflitto con una modifica fatta da un altro dispositivo: unire le due
+  versioni tenendo entrambe le decisioni, non sovrascrivere.
+
 ## Cos'è
 Una PWA (web app installabile sul telefono) per le serate karaoke in casa di
 **Ester e la mamma**. L'app "pesca" la prossima canzone da cantare tenendo conto
@@ -68,3 +82,4 @@ Il mockup è la fonte di verità per schermate e comportamento finché non esist
 - 2026-11-23 — Creato il tema Material (seed `#A8EBF1`) e i token Penpot.
 - 2026-11-26 — Mockup interattivo con tema giorno/notte e regole di pesca sopra.
 - 2026-11-26 — Collegata la cartella locale al repository GitHub; creata questa memoria.
+- 2026-11-26 — Regola di sync: `git pull` a inizio sessione, commit + push dopo ogni modifica (accesso anche da telefono a computer spento).
