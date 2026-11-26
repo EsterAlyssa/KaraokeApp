@@ -136,6 +136,11 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
   Il mockup usava una palette indaco provvisoria: nell'app è già sostituita.
 - Layout, forme (vetro, card che si trascina, pulsante Pesca grande) e testi come nel mockup.
 - Mobile first, target touch ≥ 44px, testi accessibili (contrasto ≥ 4.5:1).
+- **Layout fisso allo schermo:** la pagina non scorre mai (`html, body { overflow: hidden }`,
+  `.app` alta `100dvh`). La home deve stare sempre tutta in una schermata: le misure usano
+  `clamp(min, …dvh, max)` e si stringono sugli schermi bassi (blocco "layout fisso allo schermo"
+  in fondo ad `app.css`). Provata a 375×600, 375×667, 390×844. Se si aggiunge qualcosa alla home,
+  riprovare a 375×600. Lista e moduli scorrono solo al loro interno.
 
 ## Da fare / decisioni aperte
 - [x] Stack e prima versione della PWA.
@@ -174,3 +179,5 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 - 2026-11-27 — Anche la serata è condivisa tra i telefoni (canzoni viste, pescate, interruttore,
   "Ricomincia la serata"), salvata in `karaoke/night.json` accanto alle canzoni.
 - 2026-11-27 — Filtro "Solo tonalità originale" nella pesca (sotto "Che atmosfera?").
+- 2026-11-27 — Layout fisso allo schermo: la home si adatta all'altezza (dopo un "aggiorna" i
+  pulsanti Lista/Aggiungi risultavano tagliati), la pagina non scorre più.

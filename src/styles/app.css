@@ -896,3 +896,69 @@ input::placeholder {
   margin-top: 8px;
   min-height: 70px;
 }
+
+/* ---------- layout fisso allo schermo ----------
+   La pagina non scorre mai: l'app occupa esattamente lo schermo visibile (dvh = altezza reale,
+   senza la barra del browser). La home si "stringe" sugli schermi bassi invece di uscire dai bordi.
+   Le altre schermate scorrono solo al loro interno (lista, moduli). */
+
+html,
+body {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+.app {
+  height: 100vh; /* telefoni vecchi */
+}
+@supports (height: 100dvh) {
+  .app {
+    height: 100dvh;
+  }
+}
+
+.home {
+  gap: clamp(10px, 2.4dvh, 26px);
+  padding: clamp(14px, 3dvh, 26px) 22px clamp(12px, 2.6dvh, 26px);
+}
+.home .stack {
+  gap: clamp(8px, 1.5dvh, 14px);
+}
+.home .h2 {
+  font-size: clamp(18px, 2.6dvh, 21px);
+}
+.singer {
+  gap: clamp(4px, 0.9dvh, 8px);
+}
+.singer__avatar {
+  width: clamp(54px, 9.5dvh, 82px);
+  height: clamp(54px, 9.5dvh, 82px);
+  font-size: clamp(22px, 3.8dvh, 32px);
+}
+.singer__avatar--small {
+  font-size: clamp(16px, 2.7dvh, 23px);
+}
+.singer__name {
+  font-size: clamp(16px, 2.2dvh, 18px);
+}
+.mood {
+  min-height: clamp(56px, 10.5dvh, 96px);
+  gap: clamp(4px, 0.9dvh, 8px);
+  padding: 6px 4px;
+}
+.toggle-row {
+  min-height: 52px;
+  padding: clamp(6px, 1.1dvh, 10px) 14px;
+}
+.home .muted.body {
+  font-size: clamp(15px, 2dvh, 17px);
+}
+.home__actions {
+  gap: clamp(10px, 1.6dvh, 16px);
+}
+.btn-hero {
+  height: clamp(62px, 11dvh, 100px);
+  font-size: clamp(24px, 3.6dvh, 30px);
+}
+.home .btn-glass {
+  height: clamp(48px, 7dvh, 62px);
+}
