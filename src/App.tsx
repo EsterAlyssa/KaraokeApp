@@ -2,8 +2,9 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { draw } from './lib/draw';
 import { today } from './lib/format';
 import { mergeSongs } from './lib/merge';
+import { markSeen, mergeNight, nightSignature, restartNight, seenIds, type NightState } from './lib/night';
 import { loadNight, loadSongs, loadTheme, saveNight, saveSongs, saveTheme, type Theme } from './lib/storage';
-import { getCode, setCode as storeCode, signature, syncSongs, type SyncStatus } from './lib/sync';
+import { getCode, setCode as storeCode, signature, syncAll, type SyncStatus } from './lib/sync';
 import type { MoodId, SingerId, Song } from './lib/types';
 import { Home } from './screens/Home';
 import { Draw, type DrawPhase } from './screens/Draw';
@@ -37,6 +38,10 @@ export default function App() {
   const [syncDetail, setSyncDetail] = useState('');
   const songsRef = useRef(songs);
   songsRef.current = songs;
+  const nightRef = useRef(night);
+  nightRef.current = night;
+  /** Firma di tutto ciò che si sincronizza: canzoni + serata. */
+  const fullSig = (list: Song[], n: NightState) => `${signature(list)}#${nightSignature(n)}`;
   const syncedSig = useRef<string | null>(null);
   const inFlight = useRef(false);
 
@@ -44,28 +49,34 @@ export default function App() {
     if (!code || inFlight.current) return;
     inFlight.current = true;
     setSyncStatus('syncing');
-    const sent = songsRef.current;
-    const r = await syncSongs(sent, code);
+    const r = await syncAll(songsRef.current, nightRef.current, code);
     inFlight.current = false;
     setSyncStatus(r.status);
     setSyncDetail(r.detail ?? '');
     if (r.status !== 'ok' || !r.songs) return;
     setLastSync(Date.now());
     const serverSongs = r.songs;
-    syncedSig.current = signature(serverSongs);
+    const serverNight = r.night;
+    if (serverNight) syncedSig.current = fullSig(serverSongs, serverNight);
     // Unisco anche con quello che è cambiato sul telefono mentre la richiesta era in viaggio.
     setSongs((local) => {
       const merged = mergeSongs(local, serverSongs);
       return signature(merged) === signature(local) ? local : merged;
     });
+    if (serverNight) {
+      setNight((local) => {
+        const merged = mergeNight(local, serverNight);
+        return nightSignature(merged) === nightSignature(local) ? local : merged;
+      });
+    }
   }, [code]);
 
   // Dopo ogni modifica locale: sync (con una piccola attesa per raggruppare i tocchi).
   useEffect(() => {
-    if (!code || signature(songs) === syncedSig.current) return;
+    if (!code || fullSig(songs, night) === syncedSig.current) return;
     const t = window.setTimeout(runSync, 1200);
     return () => window.clearTimeout(t);
-  }, [songs, code, runSync]);
+  }, [songs, night, code, runSync]);
 
   // All'apertura, quando torna la rete, quando si torna sull'app, e ogni minuto.
   useEffect(() => {
@@ -97,27 +108,28 @@ export default function App() {
 
   const touch = (s: Song, patch: Partial<Song>): Song => ({ ...s, ...patch, updatedAt: Date.now() });
 
-  const doDraw = (list: Song[], seen: string[], draws: number) => {
-    const n = draws + 1;
-    const r = draw(list, { singer, moods, serata: night.serata, seen }, n, cur);
+  /** Pesca con la serata `n` (già aggiornata con l'ultima canzone vista, se serve). */
+  const doDraw = (list: Song[], n: NightState) => {
+    const num = n.draws + 1;
+    const r = draw(list, { singer, moods, serata: n.serata, seen: seenIds(n) }, num, cur);
     setScreen('draw');
     if (!r) {
       setPhase('empty');
-      setNight((x) => ({ ...x, seen }));
+      setNight(n);
       return;
     }
     setCur(r.song.id);
     setIsOld(r.isOld);
     setPhase('card');
-    setNight((x) => ({ ...x, seen, draws: n }));
+    setNight({ ...n, draws: num });
   };
 
-  const startDraw = () => doDraw(songs, night.seen, night.draws);
+  const startDraw = () => doDraw(songs, night);
 
   const sing = () => {
     if (!cur) return;
     setSongs(songs.map((s) => (s.id === cur ? touch(s, { lastSung: today(), score: s.score + 1 }) : s)));
-    setNight((x) => ({ ...x, seen: [...x.seen, cur] }));
+    setNight((x) => markSeen(x, cur));
     setPhase('done');
   };
 
@@ -125,7 +137,7 @@ export default function App() {
     if (!cur) return;
     const next = songs.map((s) => (s.id === cur ? touch(s, { score: s.score - 1 }) : s));
     setSongs(next);
-    doDraw(next, [...night.seen, cur], night.draws);
+    doDraw(next, markSeen(night, cur));
   };
 
   const addSong = (song: Song) => {
@@ -182,13 +194,13 @@ export default function App() {
           serata={night.serata}
           onToggleSerata={() => {
             const on = !night.serata;
-            setNight((x) => ({ ...x, serata: on }));
+            setNight((x) => ({ ...x, serata: on, serataAt: Date.now() }));
             showToast(on ? 'Stasera niente ripetizioni' : 'Ripetizioni permesse');
           }}
           onSing={sing}
           onSkip={skip}
           onNext={startDraw}
-          onRestart={() => doDraw(songs, [], night.draws)}
+          onRestart={() => doDraw(songs, restartNight(night))}
           onHome={() => setScreen('home')}
         />
       )}

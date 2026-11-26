@@ -49,7 +49,8 @@ scripts/notion-import.mjs  liste Notion -> src/data/seed.json             (npm r
 public/                 favicon.svg + icone PWA generate (npm run icons)
 api/sync.ts             funzione Vercel POST /api/sync (unisce e salva su Vercel Blob)
 src/lib/                types, format (date/testi), draw (regole di pesca), storage (localStorage),
-                        merge (regola di unione, usata da app e server), sync (chiamate a /api/sync)
+                        merge (unione canzoni) e night (serata + sua unione), usati da app e server,
+                        sync (chiamate a /api/sync)
 src/screens/            Home, Draw (pescata), SongList, AddSong, SyncSettings
 src/components/         Icon, Chip, TopBar
 src/styles/             theme.css (GENERATO, non toccare) + app.css
@@ -62,18 +63,20 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 - **Dati:** salvati sul telefono in localStorage (`karaoke.songs.v1`). Al primo avvio si
   parte da `src/data/seed.json`. L'app funziona sempre offline; la sync è un di più.
 - **Sync tra i telefoni:**
-  - Server: `api/sync.ts` su Vercel. Salva tutte le canzoni in un unico file JSON
-    (`karaoke/songs.json`) nel Blob store **privato** `karaoke-canzoni` (team esteralyssas-projects,
-    regione iad1). Variabile `BLOB_READ_WRITE_TOKEN` creata da Vercel.
+  - Server: `api/sync.ts` su Vercel. Nel Blob store **privato** `karaoke-canzoni` (team
+    esteralyssas-projects, regione iad1) salva due file JSON: `karaoke/songs.json` (canzoni) e
+    `karaoke/night.json` (serata condivisa). Variabile `BLOB_READ_WRITE_TOKEN` creata da Vercel.
+  - Richiesta: `{ code, songs, night? }` → risposta `{ songs, night? }` (la serata è facoltativa
+    per compatibilità con versioni vecchie dell'app).
   - Protezione: campo `code` nel corpo JSON confrontato con la variabile **`FAMILY_CODE`** su Vercel
     (spazi ai lati e maiuscole non contano, normalizzazione NFC). **Non usare un header** per il codice:
     gli header non accettano lettere accentate e la richiesta fallisce sul telefono. L'header
     `x-family-code` è accettato solo per compatibilità. Senza `FAMILY_CODE` l'API risponde 503 "not_configured".
+    Il codice lo sceglie Ester e lo imposta lei su Vercel (segnato "sensitive"): Claude non lo legge né lo scrive.
   - Variabile impostata dall'utente su Vercel: serve un **redeploy** perché valga.
   - Errori: il server scrive `[sync] …` nei log Vercel (Hobby li tiene 1 ora); la schermata
     Sincronizza mostra "Dettaglio: <status> <errore>". Se l'ETag non torna dopo 4 tentativi,
     il server rilegge, riunisce e salva senza controllo.
-    Il codice lo sceglie Ester e lo imposta lei su Vercel: Claude non lo legge né lo scrive.
   - Unione: canzone per canzone vince la modifica più recente (`updatedAt`); le canzoni nuove
     si sommano. Scrittura con `ifMatch` (ETag): se l'altro telefono ha salvato nel frattempo,
     il server rilegge e riunisce (fino a 4 tentativi).
@@ -82,8 +85,13 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
   - Codice famiglia sul telefono in `karaoke.family.v1`; pallino di stato sul pulsante nuvola in home.
   - Limite noto: se tutti e due i telefoni cambiano la *stessa* canzone offline, resta la modifica
     più recente (es. un +1 al gradimento può perdersi). Per due persone va bene.
-- **Serata:** `karaoke.serata.v1` vale solo per il giorno corrente (canzoni viste, n. pescate);
-  il giorno dopo si riparte da zero.
+- **Serata (condivisa tra i telefoni):** `karaoke.serata.v1`, vale solo per il giorno corrente.
+  Forma: `{ date, seen: {id: ms}, resetAt, draws, serata, serataAt }` (`src/lib/night.ts`).
+  Unione: stesso giorno → canzoni viste sommate (tranne quelle viste prima dell'ultimo
+  "Ricomincia la serata", `resetAt`), pescate = il numero più alto, interruttore serata = scelta
+  più recente (`serataAt`); giorni diversi → vale la serata più recente. Il vecchio formato
+  (`seen` come elenco) viene convertito all'apertura. La canzone mostrata sulla card non è condivisa:
+  ogni telefono pesca la sua.
 - **Tema:** giorno/notte; al primo avvio segue il tema del telefono, poi ricorda la scelta.
 
 ## Schermate (dal mockup)
@@ -160,3 +168,5 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 - 2026-11-27 — Sync con pallino rosso sui telefoni: il codice ora viaggia nel corpo della richiesta
   (non nell'header, che rifiuta gli accenti); salvataggio di riserva se l'ETag non torna; log `[sync]`
   e dettaglio dell'errore in app. Aggiunta la modifica delle canzoni (tocco sulla canzone nella lista).
+- 2026-11-27 — Anche la serata è condivisa tra i telefoni (canzoni viste, pescate, interruttore,
+  "Ricomincia la serata"), salvata in `karaoke/night.json` accanto alle canzoni.

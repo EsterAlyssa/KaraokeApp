@@ -2,7 +2,10 @@
 // Tenuto separato dal resto così in futuro si può aggiungere la sync tra i due telefoni.
 import seed from '../data/seed.json';
 import { today } from './format';
+import { emptyNight, isNight, type NightState } from './night';
 import type { Song } from './types';
+
+export type { NightState };
 
 const SONGS_KEY = 'karaoke.songs.v1';
 const NIGHT_KEY = 'karaoke.serata.v1';
@@ -28,18 +31,21 @@ function write(key: string, value: unknown) {
 export const loadSongs = (): Song[] => read<Song[]>(SONGS_KEY) ?? (seed as Song[]);
 export const saveSongs = (songs: Song[]) => write(SONGS_KEY, songs);
 
-export interface NightState {
-  date: string;
-  seen: string[];
-  draws: number;
-  serata: boolean;
-}
-
 /** Lo stato della serata vale solo per oggi: il giorno dopo si riparte da zero. */
 export function loadNight(): NightState {
-  const n = read<NightState>(NIGHT_KEY);
+  const raw = read<Record<string, unknown>>(NIGHT_KEY);
+  // Formato vecchio (prima della sync della serata): seen era un elenco di id.
+  const n: NightState | null = isNight(raw)
+    ? raw
+    : raw && Array.isArray(raw.seen)
+      ? {
+          ...emptyNight(String(raw.date), raw.serata !== false),
+          seen: Object.fromEntries((raw.seen as string[]).map((id) => [id, 1])),
+          draws: Number(raw.draws) || 0,
+        }
+      : null;
   if (n && n.date === today()) return n;
-  return { date: today(), seen: [], draws: 0, serata: n?.serata ?? true };
+  return emptyNight(today(), n?.serata ?? true, n?.serataAt ?? 0);
 }
 export const saveNight = (n: NightState) => write(NIGHT_KEY, n);
 

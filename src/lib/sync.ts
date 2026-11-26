@@ -1,4 +1,5 @@
 // Sync tra i telefoni: parla con /api/sync (vedi api/sync.ts).
+import type { NightState } from './night';
 import type { Song } from './types';
 
 const CODE_KEY = 'karaoke.family.v1';
@@ -36,10 +37,11 @@ export const signature = (songs: Song[]) =>
     .sort()
     .join('|');
 
-export async function syncSongs(
+export async function syncAll(
   songs: Song[],
+  night: NightState,
   code: string,
-): Promise<{ status: SyncStatus; songs?: Song[]; detail?: string }> {
+): Promise<{ status: SyncStatus; songs?: Song[]; night?: NightState; detail?: string }> {
   if (!code) return { status: 'off' };
   if (!navigator.onLine) return { status: 'offline' };
   try {
@@ -47,7 +49,7 @@ export async function syncSongs(
     const r = await fetch('/api/sync', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code, songs }),
+      body: JSON.stringify({ code, songs, night }),
     });
     if (r.status === 401) return { status: 'wrong_code' };
     if (r.status === 503) return { status: 'not_configured' };
@@ -55,8 +57,8 @@ export async function syncSongs(
       const body = (await r.json().catch(() => ({}))) as { error?: string };
       return { status: 'error', detail: `${r.status}${body.error ? ` ${body.error}` : ''}` };
     }
-    const body = (await r.json()) as { songs: Song[] };
-    return { status: 'ok', songs: body.songs };
+    const body = (await r.json()) as { songs: Song[]; night?: NightState };
+    return { status: 'ok', songs: body.songs, night: body.night };
   } catch (e) {
     return navigator.onLine ? { status: 'error', detail: String((e as Error)?.message ?? e) } : { status: 'offline' };
   }
