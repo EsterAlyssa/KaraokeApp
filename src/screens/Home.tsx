@@ -16,18 +16,21 @@ export function Home(props: {
   onSinger: (s: SingerId) => void;
   moods: MoodId[];
   onMoods: (m: MoodId[]) => void;
+  onlyOriginal: boolean;
+  onOnlyOriginal: (v: boolean) => void;
   onDraw: () => void;
   onList: () => void;
   onAdd: () => void;
 }) {
-  const { theme, singer, moods } = props;
+  const { theme, singer, moods, onlyOriginal } = props;
   const night = theme === 'night';
-  const n = pool(props.songs, { singer, moods, serata: false, seen: [] }).length;
+  const n = pool(props.songs, { singer, moods, serata: false, seen: [], onlyOriginal }).length;
+  const filtered = moods.length > 0 || onlyOriginal;
   const poolText =
     n === 0
       ? 'Nessuna canzone con questa scelta'
-      : moods.length
-        ? `Pesco tra ${n} canzoni con questo mood`
+      : filtered
+        ? `Pesco tra ${n} canzoni${moods.length ? ' con questo mood' : ''}${onlyOriginal ? ' in tonalità originale' : ''}`
         : `Pesco tra tutte le ${n} canzoni`;
 
   const toggleMood = (id: MoodId) =>
@@ -110,6 +113,21 @@ export function Home(props: {
             );
           })}
         </div>
+        <button
+          type="button"
+          className="toggle-row"
+          role="switch"
+          aria-checked={onlyOriginal}
+          onClick={() => props.onOnlyOriginal(!onlyOriginal)}
+        >
+          <span className="toggle-row__text">
+            <span className="toggle-row__title">Solo tonalità originale</span>
+            <span className="muted small">Per i karaoke dove non si può cambiare tonalità</span>
+          </span>
+          <span className="switch" aria-hidden="true">
+            <span className="switch__knob" />
+          </span>
+        </button>
         <p className="muted body">{poolText}</p>
       </section>
 

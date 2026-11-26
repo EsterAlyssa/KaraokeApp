@@ -96,7 +96,7 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 
 ## Schermate (dal mockup)
 1. **Home** — "Chi canta?" (Ester · Mamma · Insieme), "Che atmosfera?" (mood multipli),
-   pulsante **Pesca**, interruttore tema sole/luna.
+   interruttore **"Solo tonalità originale"**, pulsante **Pesca**, pulsanti sync (nuvola) e tema sole/luna.
 2. **Pescata** — card della canzone (titolo, artista, tonalità, ultima volta cantata,
    chi canta). Swipe/pulsanti: *Si canta!* oppure scarta e *Pesca la prossima*.
    Stato vuoto: "Finite le canzoni" → *Cambia filtri* / *Ricomincia la serata*.
@@ -127,6 +127,9 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 - Pescata casuale pesata: peso = `max(0.5, 3 + score) × (1 + min(giorni, 90) / 30)`.
 - **Ogni 5ª pescata**: la canzone non cantata da più tempo (le "mai cantate" per prime).
 - Non ripescare subito la stessa canzone appena mostrata.
+- **Solo tonalità originale** (facoltativo): pesca solo canzoni con `key === 0`, per i karaoke
+  dove il video non si può trasporre. Ricordato sul telefono (`karaoke.original.v1`),
+  **non** sincronizzato: dipende dal locale in cui si è, non dalla serata.
 
 ## Design
 - Tema **Material** (seed `#A8EBF1`, verde acqua), giorno = schema light, notte = schema dark.
@@ -170,3 +173,4 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
   e dettaglio dell'errore in app. Aggiunta la modifica delle canzoni (tocco sulla canzone nella lista).
 - 2026-11-27 — Anche la serata è condivisa tra i telefoni (canzoni viste, pescate, interruttore,
   "Ricomincia la serata"), salvata in `karaoke/night.json` accanto alle canzoni.
+- 2026-11-27 — Filtro "Solo tonalità originale" nella pesca (sotto "Che atmosfera?").

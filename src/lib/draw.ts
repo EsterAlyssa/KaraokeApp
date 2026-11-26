@@ -8,6 +8,8 @@ export interface DrawFilters {
   /** Modalità serata: escludi le canzoni già viste stasera. */
   serata: boolean;
   seen: string[];
+  /** Solo canzoni in tonalità originale (karaoke dove il video non si può trasporre). */
+  onlyOriginal?: boolean;
 }
 
 /** Ogni quante pescate esce la canzone non cantata da più tempo. */
@@ -20,6 +22,7 @@ export function pool(songs: Song[], f: DrawFilters): Song[] {
     (s) =>
       s.singers.includes(f.singer) &&
       (f.moods.length === 0 || f.moods.some((m) => s.moods.includes(m))) &&
+      (!f.onlyOriginal || s.key === 0) &&
       (!f.serata || !f.seen.includes(s.id)),
   );
 }

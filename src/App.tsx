@@ -3,7 +3,17 @@ import { draw } from './lib/draw';
 import { today } from './lib/format';
 import { mergeSongs } from './lib/merge';
 import { markSeen, mergeNight, nightSignature, restartNight, seenIds, type NightState } from './lib/night';
-import { loadNight, loadSongs, loadTheme, saveNight, saveSongs, saveTheme, type Theme } from './lib/storage';
+import {
+  loadNight,
+  loadOnlyOriginal,
+  loadSongs,
+  loadTheme,
+  saveNight,
+  saveOnlyOriginal,
+  saveSongs,
+  saveTheme,
+  type Theme,
+} from './lib/storage';
 import { getCode, setCode as storeCode, signature, syncAll, type SyncStatus } from './lib/sync';
 import type { MoodId, SingerId, Song } from './lib/types';
 import { Home } from './screens/Home';
@@ -24,6 +34,7 @@ export default function App() {
   const [screen, setScreen] = useState<Screen>('home');
   const [singer, setSinger] = useState<SingerId>('insieme');
   const [moods, setMoods] = useState<MoodId[]>([]);
+  const [onlyOriginal, setOnlyOriginal] = useState(loadOnlyOriginal);
   const [cur, setCur] = useState<string | null>(null);
   const [isOld, setIsOld] = useState(false);
   const [phase, setPhase] = useState<DrawPhase>('card');
@@ -99,6 +110,7 @@ export default function App() {
   }, [theme]);
   useEffect(() => saveSongs(songs), [songs]);
   useEffect(() => saveNight(night), [night]);
+  useEffect(() => saveOnlyOriginal(onlyOriginal), [onlyOriginal]);
 
   const showToast = useCallback((t: string) => {
     setToast(t);
@@ -111,7 +123,7 @@ export default function App() {
   /** Pesca con la serata `n` (già aggiornata con l'ultima canzone vista, se serve). */
   const doDraw = (list: Song[], n: NightState) => {
     const num = n.draws + 1;
-    const r = draw(list, { singer, moods, serata: n.serata, seen: seenIds(n) }, num, cur);
+    const r = draw(list, { singer, moods, onlyOriginal, serata: n.serata, seen: seenIds(n) }, num, cur);
     setScreen('draw');
     if (!r) {
       setPhase('empty');
@@ -179,6 +191,8 @@ export default function App() {
           onSinger={setSinger}
           moods={moods}
           onMoods={setMoods}
+          onlyOriginal={onlyOriginal}
+          onOnlyOriginal={setOnlyOriginal}
           onDraw={startDraw}
           onList={() => setScreen('list')}
           onAdd={() => setScreen('add')}

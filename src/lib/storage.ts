@@ -10,6 +10,7 @@ export type { NightState };
 const SONGS_KEY = 'karaoke.songs.v1';
 const NIGHT_KEY = 'karaoke.serata.v1';
 const THEME_KEY = 'karaoke.theme.v1';
+const ORIGINAL_KEY = 'karaoke.original.v1';
 
 function read<T>(key: string): T | null {
   try {
@@ -56,3 +57,7 @@ export function loadTheme(): Theme {
   return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'night' : 'day';
 }
 export const saveTheme = (t: Theme) => write(THEME_KEY, t);
+
+/** Filtro "Solo tonalità originale": solo su questo telefono (dipende dal karaoke in cui si è). */
+export const loadOnlyOriginal = () => read<boolean>(ORIGINAL_KEY) === true;
+export const saveOnlyOriginal = (v: boolean) => write(ORIGINAL_KEY, v);
