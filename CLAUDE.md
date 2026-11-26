@@ -135,6 +135,11 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 - Tema **Material** (seed `#A8EBF1`, verde acqua), giorno = schema light, notte = schema dark.
   Il mockup usava una palette indaco provvisoria: nell'app è già sostituita.
 - Layout, forme (vetro, card che si trascina, pulsante Pesca grande) e testi come nel mockup.
+- **Icona dell'app** ("duetto di dadi", scelta da Ester): due microfoni con la testa a dado, speculari
+  e distanziati, uno verde acqua (#9DF0F8) e uno azzurro (#D7E3FF), con una nota musicale bianca in mezzo,
+  su fondo #00696F. Sorgente: `design/icone/d-duetto-dadi.svg`, copiata in `public/favicon.svg`; le PNG si
+  rigenerano con `npm run icons` (`pwa-assets.config.mjs`: sfondo verde acqua fino ai bordi per iPhone e
+  Android maskable). In `design/icone/` ci sono anche le proposte scartate (a-microfono, b-due-voci, c-dado).
 - Mobile first, target touch ≥ 44px, testi accessibili (contrasto ≥ 4.5:1).
 - **Layout fisso allo schermo:** la pagina non scorre mai (`html, body { overflow: hidden }`,
   `.app` alta `100dvh`). La home deve stare sempre tutta in una schermata: le misure usano
@@ -181,3 +186,5 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 - 2026-11-27 — Filtro "Solo tonalità originale" nella pesca (sotto "Che atmosfera?").
 - 2026-11-27 — Layout fisso allo schermo: la home si adatta all'altezza (dopo un "aggiorna" i
   pulsanti Lista/Aggiungi risultavano tagliati), la pagina non scorre più.
+- 2026-11-27 — Nuova icona "duetto di dadi" (mix delle 3 proposte: microfono + due voci + dado),
+  con la nota musicale al posto del cuore.
