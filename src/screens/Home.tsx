@@ -1,6 +1,7 @@
 import { Icon } from '../components/Icon';
 import { pool } from '../lib/draw';
 import type { Theme } from '../lib/storage';
+import { statusText, type SyncStatus } from '../lib/sync';
 import { MOODS, SINGERS, type MoodId, type SingerId, type Song } from '../lib/types';
 
 const moodIcon = { allegra: 'sun', ballare: 'note', gruppo: 'group' } as const;
@@ -8,6 +9,8 @@ const moodIcon = { allegra: 'sun', ballare: 'note', gruppo: 'group' } as const;
 export function Home(props: {
   theme: Theme;
   onToggleTheme: () => void;
+  syncStatus: SyncStatus;
+  onSync: () => void;
   songs: Song[];
   singer: SingerId;
   onSinger: (s: SingerId) => void;
@@ -39,6 +42,15 @@ export function Home(props: {
             Karaoke <em>di casa</em>
           </h1>
         </div>
+        <button
+          type="button"
+          className="round round--lg glass sync-btn"
+          aria-label={`Sincronizzazione: ${statusText[props.syncStatus]}`}
+          onClick={props.onSync}
+        >
+          <Icon name="cloud" stroke={1.5} />
+          <span className={`sync-dot sync-dot--badge sync-status--${props.syncStatus}`} aria-hidden="true" />
+        </button>
         <button
           type="button"
           className="round round--lg glass"

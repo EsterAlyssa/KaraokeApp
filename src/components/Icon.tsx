@@ -1,7 +1,7 @@
 // Icone a tratto, prese dal mockup.
 type Name =
   | 'sun' | 'moon' | 'check' | 'note' | 'group' | 'dice' | 'list' | 'plus' | 'minus'
-  | 'back' | 'close' | 'clock' | 'search' | 'filter';
+  | 'back' | 'close' | 'clock' | 'search' | 'filter' | 'cloud';
 
 const paths: Record<Name, React.ReactNode> = {
   sun: (<><circle cx="12" cy="12" r="4" /><path d="M12 2.8v2M12 19.2v2M2.8 12h2M19.2 12h2M5.5 5.5l1.4 1.4M17.1 17.1l1.4 1.4M5.5 18.5l1.4-1.4M17.1 6.9l1.4-1.4" /></>),
@@ -18,6 +18,7 @@ const paths: Record<Name, React.ReactNode> = {
   clock: (<><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></>),
   search: (<><circle cx="11" cy="11" r="6.5" /><path d="M20 20l-4.2-4.2" /></>),
   filter: <path d="M4 6.5h16M7 12h10M10 17.5h4" />,
+  cloud: <path d="M7 18.5h10.5a4 4 0 0 0 .6-7.95A6 6 0 0 0 6.6 9.3 4.6 4.6 0 0 0 7 18.5z" />,
 };
 
 export function Icon({ name, size = 24, stroke = 1.6 }: { name: Name; size?: number; stroke?: number }) {

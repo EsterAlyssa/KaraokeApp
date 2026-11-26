@@ -348,7 +348,13 @@ input::placeholder {
 .home__head {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+}
+.home__head .display {
+  font-size: clamp(24px, 6.8vw, 34px);
+}
+.home__titles {
+  min-width: 0;
 }
 .home__titles {
   flex: 1;
@@ -703,6 +709,54 @@ input::placeholder {
   border-radius: 8px;
   padding: 2px 8px;
   color: var(--ink);
+}
+
+/* ---------- sync ---------- */
+
+.sync-btn {
+  position: relative;
+}
+.sync-dot {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+.sync-dot--badge {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  box-shadow: 0 0 0 2px var(--bg);
+}
+.sync-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--surface);
+  font-size: 17px;
+  font-weight: 700;
+}
+/* Colori dello stato: verde = ok, ambra = in attesa, rosso = da sistemare. Il testo dice sempre lo stato. */
+.sync-status--ok .sync-dot,
+.sync-dot.sync-status--ok {
+  background: var(--primary);
+}
+.sync-status--syncing .sync-dot,
+.sync-dot.sync-status--syncing,
+.sync-status--offline .sync-dot,
+.sync-dot.sync-status--offline {
+  background: #c98a00;
+}
+.sync-status--wrong_code .sync-dot,
+.sync-dot.sync-status--wrong_code,
+.sync-status--not_configured .sync-dot,
+.sync-dot.sync-status--not_configured,
+.sync-status--error .sync-dot,
+.sync-dot.sync-status--error {
+  background: var(--danger);
 }
 
 /* ---------- nuova canzone ---------- */

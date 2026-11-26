@@ -13,6 +13,8 @@ export interface Song {
   lastSung: string | null;
   /** Gradimento: +1 quando si canta, −1 quando si scarta. */
   score: number;
+  /** Quando è stata modificata l'ultima volta (ms). Serve alla sync: vince la più recente. 0 = mai toccata. */
+  updatedAt?: number;
 }
 
 export const SINGERS: { id: SingerId; name: string; ini: string }[] = [
