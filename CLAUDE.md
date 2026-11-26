@@ -34,6 +34,7 @@ di chi canta, dell'atmosfera e di cosa si è cantato di recente.
 | Tema colori Material (export Material Theme Builder, seed `#A8EBF1`) | `design/material-theme.json` |
 | Token colore per Penpot (palette tonali + schemi) | `design/penpot-tokens.json` |
 | Canzoni originali (fonte dell'import) | Notion › Karaoke › *Con mamma*, *Mie*, *Solo mamma*, *Di gruppo* (*Vale* esclusa) |
+| App online (Vercel) | progetto `karaoke-di-casa` nel team *esteralyssas-projects*, collegato a GitHub: **ogni push su `main` pubblica da solo** |
 
 Il mockup è il riferimento per l'aspetto; il comportamento vero ora sta nel codice.
 
@@ -104,7 +105,7 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 - [x] Dati **offline** sul telefono (localStorage).
 - [x] Tema Material al posto della palette provvisoria.
 - [x] Canzoni importate da Notion (133).
-- [ ] Hosting su **Vercel** (da pubblicare).
+- [x] Hosting su **Vercel** (deploy automatico da GitHub).
 - [ ] **Sync gratuita** tra i 2 telefoni (Ester e mamma).
 - [ ] Modificare / eliminare una canzone dalla lista (nel mockup non c'era).
 - [ ] Assegnare i mood alle canzoni importate (da Notion arriva solo "Di gruppo").
@@ -119,3 +120,5 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 - 2026-11-26 — Prima versione della PWA: Vite + React + TS, tema Material, dati offline,
   133 canzoni da Notion (Con mamma → Insieme, Mie → Ester, Solo mamma → Mamma,
   Di gruppo → Insieme + mood "Di gruppo"; doppioni uniti per titolo). File di tema spostati in `design/`.
+- 2026-11-27 — Pubblicata su Vercel (progetto `karaoke-di-casa`), deploy automatico a ogni push su `main`.
+  Nessun database per ora: i dati stanno su ogni telefono; la sync è il prossimo passo.
