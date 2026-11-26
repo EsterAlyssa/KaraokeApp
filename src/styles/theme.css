@@ -1,0 +1,37 @@
+/* GENERATO da scripts/gen-theme.mjs: non modificare a mano. */
+/* Fonte: design/material-theme.json (seed #A8EBF1) */
+
+:root,
+[data-theme='day'] {
+  --bg: #F4FAFB;
+  --card: #FFFFFF;
+  --surface: #E3E9EA;
+  --ink: #161D1D;
+  --muted: #3F4849;
+  --line: #BEC8C9;
+  --line-strong: #6F797A;
+  --primary: #00696F;
+  --on-primary: #FFFFFF;
+  --accent: #9DF0F8;
+  --on-accent: #004F54;
+  --tertiary: #D7E3FF;
+  --danger: #BA1A1A;
+  color-scheme: light;
+}
+
+[data-theme='night'] {
+  --bg: #0E1415;
+  --card: #090F10;
+  --surface: #252B2C;
+  --ink: #DDE4E4;
+  --muted: #BEC8C9;
+  --line: #3F4849;
+  --line-strong: #899393;
+  --primary: #80D4DB;
+  --on-primary: #00363A;
+  --accent: #004F54;
+  --on-accent: #9DF0F8;
+  --tertiary: #374764;
+  --danger: #FFB4AB;
+  color-scheme: dark;
+}

@@ -1,0 +1,1636 @@
+[
+  {
+    "id": "7-years",
+    "title": "7 years",
+    "artist": "Lukas Graham",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "al-mio-paese",
+    "title": "Al mio paese",
+    "artist": "Serena Brancale ft Delia ft Levante",
+    "key": -3,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "all-of-me",
+    "title": "All of me",
+    "artist": "John Legend",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "almeno-stavolta",
+    "title": "Almeno stavolta",
+    "artist": "Nek",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "anche-un-uomo",
+    "title": "Anche un uomo",
+    "artist": "Mina",
+    "key": -2,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "ancora",
+    "title": "Ancora",
+    "artist": "Edoardo de Crescenzo",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "anema-e-core",
+    "title": "Anema e core",
+    "artist": "Serena Brancale",
+    "key": -3,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "angels-on-the-moon",
+    "title": "Angels on the moon",
+    "artist": "Thriving Ivory",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "baby-one-more-time",
+    "title": "Baby one more time",
+    "artist": "Britney Spears",
+    "key": -2,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "back-to-black",
+    "title": "Back to black",
+    "artist": "Amy Winehouse",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "baila-morena",
+    "title": "Baila Morena",
+    "artist": "Zucchero",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "bailando",
+    "title": "Bailando",
+    "artist": "Enrique Iglesias",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "bam-bam",
+    "title": "Bam bam",
+    "artist": "Camila Cabello ft Ed Sheeran",
+    "key": -4,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "beautiful-things",
+    "title": "Beautiful things",
+    "artist": "Benson Boone",
+    "key": -4,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "best-of-you",
+    "title": "Best of you",
+    "artist": "Foo Fighters",
+    "key": -4,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "bianca",
+    "title": "Bianca",
+    "artist": "Noemi",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "californication",
+    "title": "Californication",
+    "artist": "Red Hot Chilli Peppers",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "canto-d-amore",
+    "title": "Canto d'amore",
+    "artist": "Angelina Mango ft Marco Mengoni",
+    "key": -3,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "chasing-pavements",
+    "title": "Chasing pavements",
+    "artist": "Adele",
+    "key": -4,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "che-to-dico-a-fa",
+    "title": "Che to dico a fa",
+    "artist": "Angelina Mango",
+    "key": -3,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "chiamo-io-chiami-tu",
+    "title": "Chiamo io chiami tu",
+    "artist": "Gaia",
+    "key": -2,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "ci-pensiamo-domani",
+    "title": "Ci pensiamo domani",
+    "artist": "Angelina Mango",
+    "key": -3,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "come-foglie",
+    "title": "Come foglie",
+    "artist": "Malika Ayane",
+    "key": -3,
+    "singers": [
+      "insieme",
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "come-saprei",
+    "title": "Come saprei",
+    "artist": "Giorgia",
+    "key": -3,
+    "singers": [
+      "insieme",
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "come-un-tuono",
+    "title": "Come un tuono",
+    "artist": "Rose Villain",
+    "key": -4,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "crazy-little-thing-called-love",
+    "title": "Crazy little thing called love",
+    "artist": "Queen",
+    "key": 1,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "cuore-e-vento",
+    "title": "Cuore e vento",
+    "artist": "Tazenda",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "demons",
+    "title": "Demons",
+    "artist": "Imagine Dragons",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "dolcissimo-amore",
+    "title": "Dolcissimo amore",
+    "artist": "Irene Grandi",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "don-t-know-why",
+    "title": "Don't know why",
+    "artist": "Norah Jones",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "dove-si-balla",
+    "title": "Dove si balla",
+    "artist": "D'Argen d'amico",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "drive",
+    "title": "Drive",
+    "artist": "Incubus",
+    "key": -1,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "due-vite",
+    "title": "Due vite",
+    "artist": "Marco Mengoni",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "eco",
+    "title": "Eco",
+    "artist": "Joan Thiele",
+    "key": -2,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "el-mismo-sol",
+    "title": "El mismo sol",
+    "artist": "Alvaro Soler",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "everlong",
+    "title": "Everlong",
+    "artist": "Foo fighters",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "eye-in-the-sky",
+    "title": "Eye in the sky",
+    "artist": "Alan Parsons Project",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "fallen",
+    "title": "Fallen",
+    "artist": "Volbeat",
+    "key": -2,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "feeling-good",
+    "title": "Feeling good",
+    "artist": "Muse",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "fotoromanza",
+    "title": "Fotoromanza",
+    "artist": "Nannini",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "funky-gallo",
+    "title": "Funky Gallo",
+    "artist": "Zucchero",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "gianna-gianna",
+    "title": "Gianna Gianna",
+    "artist": "Rino Gaetano",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "giovani-wannabe",
+    "title": "Giovani wannabe",
+    "artist": "PTN",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "hello",
+    "title": "Hello",
+    "artist": "Adele",
+    "key": -4,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "higher",
+    "title": "Higher",
+    "artist": "Creed",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "holiday",
+    "title": "Holiday",
+    "artist": "Green day",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "home",
+    "title": "Home",
+    "artist": "Daughtry",
+    "key": -3,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "how-you-remind-me",
+    "title": "How you remind me",
+    "artist": "Nickelback",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "i-don-t-want-to-miss-a-thing",
+    "title": "I don't want to miss a thing",
+    "artist": "Aerosmith",
+    "key": -2,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "i-love-rock-and-roll",
+    "title": "I love rock and roll",
+    "artist": "Joan Jett",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "in-una-notte-d-estate",
+    "title": "In una notte d'estate",
+    "artist": "Le Vibrazioni",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "io-e-la-mia-signorina",
+    "title": "Io e la mia signorina",
+    "artist": "Neffa",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "italodisco",
+    "title": "Italodisco",
+    "artist": "The kolors",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "just-the-two-of-us",
+    "title": "Just the two of us",
+    "artist": "Bill Withers",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "l-ombelico-del-mondo",
+    "title": "L'ombelico del mondo",
+    "artist": "Jovanotti",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "la-distanza-di-un-amore",
+    "title": "La distanza di un amore",
+    "artist": "Alex Baroni",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "la-noia",
+    "title": "La noia",
+    "artist": "Angelina Mango",
+    "key": -3,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "la-notte",
+    "title": "La notte",
+    "artist": "Moda",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "la-rondine",
+    "title": "La rondine",
+    "artist": "Mango",
+    "key": 0,
+    "singers": [
+      "insieme",
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "long-live-rock-and-roll",
+    "title": "Long live rock and roll",
+    "artist": "Daughtry",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "love-me-or-leave-me",
+    "title": "Love me or leave me",
+    "artist": "Nina Simone",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "ma-stasera",
+    "title": "Ma stasera",
+    "artist": "Marco Mengoni",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "made-in-italy",
+    "title": "Made in Italy",
+    "artist": "Rosa Chemical",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "malavita",
+    "title": "Malavita",
+    "artist": "Comacose",
+    "key": -2,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "me-so-mbriacato",
+    "title": "Me so ‘mbriacato",
+    "artist": "Mannarino",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "mediterraneo",
+    "title": "Mediterraneo",
+    "artist": "Mango",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "mezzo-mondo",
+    "title": "Mezzo mondo",
+    "artist": "Emma",
+    "key": -3,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "mezzo-rotto",
+    "title": "Mezzo rotto",
+    "artist": "Alessandra Amoroso, Big Mama",
+    "key": -4,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "mi-fidero",
+    "title": "Mi fiderò",
+    "artist": "Mengoni ft Madame",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "mi-vendo",
+    "title": "Mi vendo",
+    "artist": "Renato Zero",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "monetine",
+    "title": "Monetine",
+    "artist": "Daniele Silvestri",
+    "key": -2,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "musica-leggerissima",
+    "title": "Musica leggerissima",
+    "artist": "Colapesce e Di Martino",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "my-immortal",
+    "title": "My immortal",
+    "artist": "The Evanescence",
+    "key": -4,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "my-sacrifice",
+    "title": "My sacrifice",
+    "artist": "Creed",
+    "key": -2,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "nei-tuoi-particolari",
+    "title": "Nei tuoi particolari",
+    "artist": "Ultimo",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "nel-bene-e-nel-male",
+    "title": "Nel bene e nel male",
+    "artist": "Madame",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "nella-mia-citta",
+    "title": "Nella mia città",
+    "artist": "Mango",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "non-litighiamo-piu",
+    "title": "Non litighiamo più",
+    "artist": "Rocco Hunt",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "non-me-lo-so-spiegare",
+    "title": "Non me lo so spiegare",
+    "artist": "Tiziano Ferro",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "oggi-sono-io",
+    "title": "Oggi sono io",
+    "artist": "Alex Britti",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "oh-ma",
+    "title": "Oh ma",
+    "artist": "Rocco Hunt e Noemi",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "one-last-breath",
+    "title": "One last breath",
+    "artist": "Creed",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "oops-i-did-it-again",
+    "title": "Oops I did it again",
+    "artist": "Britney Spears",
+    "key": -2,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "oro",
+    "title": "Oro",
+    "artist": "Mango",
+    "key": 0,
+    "singers": [
+      "insieme",
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "ossesione",
+    "title": "Ossesione",
+    "artist": "Samurai jay",
+    "key": 1,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "otherside",
+    "title": "Otherside",
+    "artist": "Red Hot Chilli Peppers",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "partenope",
+    "title": "Partenope",
+    "artist": "The kolors ft Serena Brancale",
+    "key": -3,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "pavimento-liquido",
+    "title": "Pavimento liquido",
+    "artist": "Alex Baroni",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "per-un-milione",
+    "title": "Per un milione",
+    "artist": "Boombadash",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "piazza-san-marco",
+    "title": "Piazza San Marco",
+    "artist": "Annalisa e Marco Mengoni",
+    "key": -4,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "poesie-clandestine",
+    "title": "Poesie clandestine",
+    "artist": "LDA e Aka7even",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "pronto-come-va",
+    "title": "Pronto come va",
+    "artist": "The kolors",
+    "key": -1,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "quanto-tempo",
+    "title": "Quanto tempo",
+    "artist": "Biagio Antonacci",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "resta-cu-me",
+    "title": "Resta cu me",
+    "artist": "Pino Daniele",
+    "key": 0,
+    "singers": [
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "ricominciamo",
+    "title": "Ricominciamo",
+    "artist": "Pappalardo",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "ricordi",
+    "title": "Ricordi",
+    "artist": "PTN",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "rolling-in-the-deep",
+    "title": "Rolling in the deep",
+    "artist": "Adele",
+    "key": -6,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "romantico-ma-muori",
+    "title": "Romantico ma muori",
+    "artist": "PTN",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "rosso-relativo",
+    "title": "Rosso relativo",
+    "artist": "Tiziano Ferro",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "rubami-la-notte",
+    "title": "Rubami la notte",
+    "artist": "PTN",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "saliro",
+    "title": "Salirò",
+    "artist": "Daniele Silvestri",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "scrivi-qualcosa-per-me",
+    "title": "Scrivi qualcosa per me",
+    "artist": "Alex Baroni",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "scrivile-scemo",
+    "title": "Scrivile scemo",
+    "artist": "PTN",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "senza-fare-sul-serio",
+    "title": "Senza fare sul serio",
+    "artist": "Malika Ayane",
+    "key": -3,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "sere-nere",
+    "title": "Sere nere",
+    "artist": "Tiziano Ferro",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "serenata",
+    "title": "Serenata",
+    "artist": "Serena Brancale ft Alessandra Amoroso",
+    "key": -2,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "seven-nation-army",
+    "title": "Seven nation army",
+    "artist": "The white stripes",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "shivers",
+    "title": "Shivers",
+    "artist": "Ed Sheeran",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "so-easy-to-fall-in-love",
+    "title": "So easy (to fall in love)",
+    "artist": "Olivia Dean",
+    "key": -4,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "sofia",
+    "title": "Sofia",
+    "artist": "Alvaro Soler",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "sole-spento",
+    "title": "Sole spento",
+    "artist": "Timoria",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "someone-like-you",
+    "title": "Someone like you",
+    "artist": "Adele",
+    "key": -2,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "sorry-scusa-lo-siento",
+    "title": "Sorry scusa lo siento",
+    "artist": "PTN",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "splash",
+    "title": "Splash",
+    "artist": "Colapasce e Di Martino",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "sunrise",
+    "title": "Sunrise",
+    "artist": "Norah Jones",
+    "key": -2,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "tenerife-sea",
+    "title": "Tenerife sea",
+    "artist": "Ed Sheeran",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "time-is-running-out",
+    "title": "Time is running out",
+    "artist": "Muse",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "titanium",
+    "title": "Titanium",
+    "artist": "David Guetta ft. Sia",
+    "key": -6,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "tu-con-chi-fai-l-amore",
+    "title": "Tu con chi fai l'amore",
+    "artist": "The kolors",
+    "key": -2,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "tutto-quello-che-un-uomo",
+    "title": "Tutto quello che un uomo",
+    "artist": "Sergio Cammariere",
+    "key": 4,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "un-bacio-all-improvviso",
+    "title": "Un bacio all'improvviso",
+    "artist": "Ana Mena ft. Rocco Hunt",
+    "key": -2,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "urlando-contro-il-cielo",
+    "title": "Urlando contro il cielo",
+    "artist": "Ligabue",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "use-somebody",
+    "title": "Use somebody",
+    "artist": "Kings of Leon",
+    "key": -4,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "vai",
+    "title": "Vai",
+    "artist": "Alfa",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "vent-anni",
+    "title": "Vent'anni",
+    "artist": "Massimo Ranieri",
+    "key": 0,
+    "singers": [
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "vertebre",
+    "title": "Vertebre",
+    "artist": "Settembre",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "via",
+    "title": "Via",
+    "artist": "Baglioni",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "vola",
+    "title": "Vola",
+    "artist": "Edoardo de Crescenzo",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "volar",
+    "title": "Volar",
+    "artist": "Alvaro Soler",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "wonderwall",
+    "title": "Wonderwall",
+    "artist": "Oasis",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "yanez-de-gomera",
+    "title": "Yanez de gomera",
+    "artist": "",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [
+      "gruppo"
+    ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "you-will-never-know",
+    "title": "You will never know",
+    "artist": "Imany",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "zombie",
+    "title": "Zombie",
+    "artist": "The cranberries",
+    "key": -1,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  }
+]
