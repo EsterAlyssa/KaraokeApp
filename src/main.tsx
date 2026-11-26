@@ -9,6 +9,10 @@ import '@fontsource/lora/600.css';
 import './styles/theme.css';
 import './styles/app.css';
 import App from './App';
+import { loadTheme } from './lib/storage';
+
+// Tema impostato prima del primo disegno, così non c'è il "lampo" giorno → notte.
+document.documentElement.dataset.theme = loadTheme();
 
 registerSW({ immediate: true });
 
