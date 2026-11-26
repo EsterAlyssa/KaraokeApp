@@ -47,8 +47,10 @@ design/                 tema Material e token Penpot (fonte dei colori)
 scripts/gen-theme.mjs   design/material-theme.json -> src/styles/theme.css  (npm run theme)
 scripts/notion-import.mjs  liste Notion -> src/data/seed.json             (npm run seed)
 public/                 favicon.svg + icone PWA generate (npm run icons)
-src/lib/                types, format (date/testi), draw (regole di pesca), storage (localStorage)
-src/screens/            Home, Draw (pescata), SongList, AddSong
+api/sync.ts             funzione Vercel POST /api/sync (unisce e salva su Vercel Blob)
+src/lib/                types, format (date/testi), draw (regole di pesca), storage (localStorage),
+                        merge (regola di unione, usata da app e server), sync (chiamate a /api/sync)
+src/screens/            Home, Draw (pescata), SongList, AddSong, SyncSettings
 src/components/         Icon, Chip, TopBar
 src/styles/             theme.css (GENERATO, non toccare) + app.css
 ```
@@ -58,8 +60,22 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 - **Colori:** mai a mano in `theme.css`. Si cambia `design/material-theme.json` e si lancia
   `npm run theme`. Le sfumature (vetro, ombre, sfondi) sono derivate in `app.css` con `color-mix`.
 - **Dati:** salvati sul telefono in localStorage (`karaoke.songs.v1`). Al primo avvio si
-  parte da `src/data/seed.json`. Tutto passa da `src/lib/storage.ts`, così la sync si
-  aggiunge lì senza toccare le schermate.
+  parte da `src/data/seed.json`. L'app funziona sempre offline; la sync è un di più.
+- **Sync tra i telefoni:**
+  - Server: `api/sync.ts` su Vercel. Salva tutte le canzoni in un unico file JSON
+    (`karaoke/songs.json`) nel Blob store **privato** `karaoke-canzoni` (team esteralyssas-projects,
+    regione iad1). Variabile `BLOB_READ_WRITE_TOKEN` creata da Vercel.
+  - Protezione: header `x-family-code` confrontato con la variabile **`FAMILY_CODE`** su Vercel
+    (maiuscole/minuscole non contano). Senza `FAMILY_CODE` l'API risponde 503 "not_configured".
+    Il codice lo sceglie Ester e lo imposta lei su Vercel: Claude non lo legge né lo scrive.
+  - Unione: canzone per canzone vince la modifica più recente (`updatedAt`); le canzoni nuove
+    si sommano. Scrittura con `ifMatch` (ETag): se l'altro telefono ha salvato nel frattempo,
+    il server rilegge e riunisce (fino a 4 tentativi).
+  - Quando: dopo ogni modifica (1,2 s di attesa), all'apertura, al ritorno della rete,
+    quando si torna sull'app e ogni minuto con l'app aperta.
+  - Codice famiglia sul telefono in `karaoke.family.v1`; pallino di stato sul pulsante nuvola in home.
+  - Limite noto: se tutti e due i telefoni cambiano la *stessa* canzone offline, resta la modifica
+    più recente (es. un +1 al gradimento può perdersi). Per due persone va bene.
 - **Serata:** `karaoke.serata.v1` vale solo per il giorno corrente (canzoni viste, n. pescate);
   il giorno dopo si riparte da zero.
 - **Tema:** giorno/notte; al primo avvio segue il tema del telefono, poi ricorda la scelta.
@@ -82,7 +98,8 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
   singers,  // ['ester' | 'mamma' | 'insieme']
   moods,    // ['allegra' | 'ballare' | 'gruppo']
   lastSung, // data ultima volta cantata 'YYYY-MM-DD', null = mai cantata
-  score }   // gradimento: +1 quando si canta, −1 quando si scarta
+  score,    // gradimento: +1 quando si canta, −1 quando si scarta
+  updatedAt } // ms dell'ultima modifica (0/assente = mai toccata); decide chi vince nella sync
 ```
 
 ## Regole di pesca (decise)
@@ -106,7 +123,8 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 - [x] Tema Material al posto della palette provvisoria.
 - [x] Canzoni importate da Notion (133).
 - [x] Hosting su **Vercel** (deploy automatico da GitHub).
-- [ ] **Sync gratuita** tra i 2 telefoni (Ester e mamma).
+- [x] **Sync gratuita** tra i 2 telefoni (Vercel Blob privato + codice famiglia).
+- [ ] Impostare `FAMILY_CODE` su Vercel e inserire lo stesso codice sui due telefoni.
 - [ ] Modificare / eliminare una canzone dalla lista (nel mockup non c'era).
 - [ ] Assegnare i mood alle canzoni importate (da Notion arriva solo "Di gruppo").
 - [ ] Sistemare i refusi nei titoli/artisti presi da Notion (es. "Che to dico a fa",
@@ -122,3 +140,9 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
   Di gruppo → Insieme + mood "Di gruppo"; doppioni uniti per titolo). File di tema spostati in `design/`.
 - 2026-11-27 — Pubblicata su Vercel (progetto `karaoke-di-casa`), deploy automatico a ogni push su `main`.
   Nessun database per ora: i dati stanno su ogni telefono; la sync è il prossimo passo.
+- 2026-11-27 — Sync tra i telefoni: Vercel Blob privato `karaoke-canzoni` (gratuito, già collegato
+  al progetto), API `/api/sync`, protezione con codice famiglia (`FAMILY_CODE`), unione per canzone
+  con "vince la più recente". Scartati: Upstash/Neon (servono passaggi in più dal Marketplace)
+  e Blob pubblico (cache CDN, letture non aggiornate).
+- 2026-11-27 — Ambiente cloud per Claude Code sul web: da creare su claude.ai/code
+  (nome KaraokeApp, script di setup `npm install`).

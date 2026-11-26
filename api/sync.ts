@@ -6,8 +6,9 @@
 //   BLOB_READ_WRITE_TOKEN  creata da Vercel collegando lo store Blob al progetto
 //   FAMILY_CODE            il "codice famiglia" scelto da Ester (da impostare a mano)
 import { BlobPreconditionFailedError, get, put } from '@vercel/blob';
-import { mergeSongs, sameSongs } from '../src/lib/merge';
-import type { Song } from '../src/lib/types';
+// Estensione .js obbligatoria: sul server Node risolve gli import ESM alla lettera.
+import { mergeSongs, sameSongs } from '../src/lib/merge.js';
+import type { Song } from '../src/lib/types.js';
 
 const PATH = 'karaoke/songs.json';
 const MAX_TRIES = 4;
