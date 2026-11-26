@@ -11,7 +11,17 @@ const SORTS: [Sort, string][] = [
   ['az', 'A–Z'],
 ];
 
-export function SongList({ songs, onBack, onAdd }: { songs: Song[]; onBack: () => void; onAdd: () => void }) {
+export function SongList({
+  songs,
+  onBack,
+  onAdd,
+  onEdit,
+}: {
+  songs: Song[];
+  onBack: () => void;
+  onAdd: () => void;
+  onEdit: (id: string) => void;
+}) {
   const [query, setQuery] = useState('');
   const [sort, setSort] = useState<Sort>('old');
   const [open, setOpen] = useState(false);
@@ -112,11 +122,17 @@ export function SongList({ songs, onBack, onAdd }: { songs: Song[]; onBack: () =
         {list.map((s) => {
           const d = daysSince(s.lastSung);
           return (
-            <article key={s.id} className="song glass">
+            <button
+              key={s.id}
+              type="button"
+              className="song glass"
+              aria-label={`Modifica ${s.title}${s.artist ? `, ${s.artist}` : ''}`}
+              onClick={() => onEdit(s.id)}
+            >
               <div className="song__top">
                 <div className="song__titles">
-                  <p className="song__title">{s.title}</p>
-                  {s.artist && <p className="muted">{s.artist}</p>}
+                  <span className="song__title">{s.title}</span>
+                  {s.artist && <span className="muted song__artist">{s.artist}</span>}
                 </div>
                 <span className="key-pill" aria-label={`Tonalità ${keyText(s.key)}`}>
                   {keyText(s.key)}
@@ -130,7 +146,7 @@ export function SongList({ songs, onBack, onAdd }: { songs: Song[]; onBack: () =
                 <span>{whoText(s)}</span>
                 {s.moods.length > 0 && <span className="tag">{moodText(s)}</span>}
               </div>
-            </article>
+            </button>
           );
         })}
         {list.length === 0 && <p className="muted center body">Nessuna canzone con questi filtri.</p>}

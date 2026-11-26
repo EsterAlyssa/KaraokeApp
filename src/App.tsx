@@ -11,7 +11,7 @@ import { SongList } from './screens/SongList';
 import { AddSong } from './screens/AddSong';
 import { SyncSettings } from './screens/SyncSettings';
 
-type Screen = 'home' | 'draw' | 'list' | 'add' | 'sync';
+type Screen = 'home' | 'draw' | 'list' | 'add' | 'edit' | 'sync';
 
 /** Ogni quanto ricontrollare le novità dall'altro telefono, con l'app aperta. */
 const POLL_MS = 60_000;
@@ -27,12 +27,14 @@ export default function App() {
   const [isOld, setIsOld] = useState(false);
   const [phase, setPhase] = useState<DrawPhase>('card');
   const [toast, setToast] = useState('');
+  const [editId, setEditId] = useState<string | null>(null);
   const toastTimer = useRef<number | undefined>(undefined);
 
   // ---- sync ----
   const [code, setCode] = useState(getCode);
   const [syncStatus, setSyncStatus] = useState<SyncStatus>(getCode() ? 'syncing' : 'off');
   const [lastSync, setLastSync] = useState<number | null>(null);
+  const [syncDetail, setSyncDetail] = useState('');
   const songsRef = useRef(songs);
   songsRef.current = songs;
   const syncedSig = useRef<string | null>(null);
@@ -46,6 +48,7 @@ export default function App() {
     const r = await syncSongs(sent, code);
     inFlight.current = false;
     setSyncStatus(r.status);
+    setSyncDetail(r.detail ?? '');
     if (r.status !== 'ok' || !r.songs) return;
     setLastSync(Date.now());
     const serverSongs = r.songs;
@@ -131,6 +134,12 @@ export default function App() {
     showToast(`Aggiunta: ${song.title}`);
   };
 
+  const editSong = (song: Song) => {
+    setSongs((list) => list.map((s) => (s.id === song.id ? { ...song, updatedAt: Date.now() } : s)));
+    setScreen('list');
+    showToast(`Modificata: ${song.title}`);
+  };
+
   const saveCode = (c: string) => {
     storeCode(c);
     syncedSig.current = null;
@@ -140,6 +149,7 @@ export default function App() {
   };
 
   const current = songs.find((s) => s.id === cur) ?? null;
+  const editing = songs.find((s) => s.id === editId) ?? null;
 
   return (
     <div className="app">
@@ -183,7 +193,27 @@ export default function App() {
         />
       )}
 
-      {screen === 'list' && <SongList songs={songs} onBack={() => setScreen('home')} onAdd={() => setScreen('add')} />}
+      {screen === 'list' && (
+        <SongList
+          songs={songs}
+          onBack={() => setScreen('home')}
+          onAdd={() => setScreen('add')}
+          onEdit={(id) => {
+            setEditId(id);
+            setScreen('edit');
+          }}
+        />
+      )}
+
+      {screen === 'edit' && editing && (
+        <AddSong
+          key={editing.id}
+          initial={editing}
+          defaultSinger={singer}
+          onBack={() => setScreen('list')}
+          onSave={editSong}
+        />
+      )}
 
       {screen === 'add' && <AddSong defaultSinger={singer} onBack={() => setScreen('home')} onSave={addSong} />}
 
@@ -192,6 +222,7 @@ export default function App() {
           code={code}
           status={syncStatus}
           lastSync={lastSync}
+          detail={syncDetail}
           onSaveCode={saveCode}
           onSyncNow={runSync}
           onBack={() => setScreen('home')}

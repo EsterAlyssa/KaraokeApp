@@ -65,8 +65,14 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
   - Server: `api/sync.ts` su Vercel. Salva tutte le canzoni in un unico file JSON
     (`karaoke/songs.json`) nel Blob store **privato** `karaoke-canzoni` (team esteralyssas-projects,
     regione iad1). Variabile `BLOB_READ_WRITE_TOKEN` creata da Vercel.
-  - Protezione: header `x-family-code` confrontato con la variabile **`FAMILY_CODE`** su Vercel
-    (maiuscole/minuscole non contano). Senza `FAMILY_CODE` l'API risponde 503 "not_configured".
+  - Protezione: campo `code` nel corpo JSON confrontato con la variabile **`FAMILY_CODE`** su Vercel
+    (spazi ai lati e maiuscole non contano, normalizzazione NFC). **Non usare un header** per il codice:
+    gli header non accettano lettere accentate e la richiesta fallisce sul telefono. L'header
+    `x-family-code` è accettato solo per compatibilità. Senza `FAMILY_CODE` l'API risponde 503 "not_configured".
+  - Variabile impostata dall'utente su Vercel: serve un **redeploy** perché valga.
+  - Errori: il server scrive `[sync] …` nei log Vercel (Hobby li tiene 1 ora); la schermata
+    Sincronizza mostra "Dettaglio: <status> <errore>". Se l'ETag non torna dopo 4 tentativi,
+    il server rilegge, riunisce e salva senza controllo.
     Il codice lo sceglie Ester e lo imposta lei su Vercel: Claude non lo legge né lo scrive.
   - Unione: canzone per canzone vince la modifica più recente (`updatedAt`); le canzoni nuove
     si sommano. Scrittura con `ifMatch` (ETag): se l'altro telefono ha salvato nel frattempo,
@@ -89,6 +95,9 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 3. **Le canzoni** — elenco con ricerca, filtri (cantante, mood, "mai cantata") e
    ordinamento (da più tempo / più recenti / A–Z).
 4. **Nuova canzone** — titolo, artista, tonalità, chi la canta, mood → *Salva canzone*.
+5. **Modifica canzone** — si apre toccando una canzone in *Le canzoni*; stesso modulo già compilato,
+   in più "Segna come mai cantata". Tonalità da −12 a +12.
+6. **Sincronizza** — pulsante nuvola in home: codice famiglia e stato della sync.
 
 ## Modello dati di una canzone
 ```
@@ -125,7 +134,9 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 - [x] Hosting su **Vercel** (deploy automatico da GitHub).
 - [x] **Sync gratuita** tra i 2 telefoni (Vercel Blob privato + codice famiglia).
 - [ ] Impostare `FAMILY_CODE` su Vercel e inserire lo stesso codice sui due telefoni.
-- [ ] Modificare / eliminare una canzone dalla lista (nel mockup non c'era).
+- [x] Modificare una canzone dalla lista.
+- [ ] Eliminare una canzone (con la sync serve una "lapide": segnarla come eliminata, non toglierla).
+- [ ] Verificare la sync vera tra i due telefoni dopo il fix del 2026-11-27.
 - [ ] Assegnare i mood alle canzoni importate (da Notion arriva solo "Di gruppo").
 - [ ] Sistemare i refusi nei titoli/artisti presi da Notion (es. "Che to dico a fa",
       "Ossesione", "Comacose", "Boombadash", "Malika Ayanne"): importati tali e quali.
@@ -146,3 +157,6 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
   e Blob pubblico (cache CDN, letture non aggiornate).
 - 2026-11-27 — Ambiente cloud per Claude Code sul web: da creare su claude.ai/code
   (nome KaraokeApp, script di setup `npm install`).
+- 2026-11-27 — Sync con pallino rosso sui telefoni: il codice ora viaggia nel corpo della richiesta
+  (non nell'header, che rifiuta gli accenti); salvataggio di riserva se l'ETag non torna; log `[sync]`
+  e dettaglio dell'errore in app. Aggiunta la modifica delle canzoni (tocco sulla canzone nella lista).

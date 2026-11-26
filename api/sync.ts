@@ -40,41 +40,67 @@ function isSong(x: unknown): x is Song {
   );
 }
 
+/** Confronto tollerante: spazi ai lati, maiuscole e accenti scritti in modi diversi non contano. */
+const norm = (s: string) => s.normalize('NFC').trim().toLowerCase();
+
+async function write(songs: Song[], etag: string | null) {
+  await put(PATH, JSON.stringify(songs), {
+    access: 'private',
+    contentType: 'application/json',
+    addRandomSuffix: false,
+    allowOverwrite: true,
+    ...(etag ? { ifMatch: etag } : {}),
+  });
+}
+
 export async function POST(request: Request) {
   const expected = process.env.FAMILY_CODE;
   if (!expected) return json({ error: 'not_configured' }, 503);
-  const code = request.headers.get('x-family-code') ?? '';
-  if (code.trim().toLowerCase() !== expected.trim().toLowerCase()) return json({ error: 'wrong_code' }, 401);
 
   let incoming: Song[];
+  let code: string;
   try {
-    const body = (await request.json()) as { songs?: unknown };
-    if (!Array.isArray(body.songs) || body.songs.length > 5000 || !body.songs.every(isSong)) {
+    const body = (await request.json()) as { songs?: unknown; code?: unknown };
+    // Il codice arriva nel corpo (accetta lettere accentate); l'header resta per le versioni vecchie dell'app.
+    code = typeof body.code === 'string' ? body.code : (request.headers.get('x-family-code') ?? '');
+    if (norm(code) !== norm(expected)) return json({ error: 'wrong_code' }, 401);
+    if (!Array.isArray(body.songs) || body.songs.length > 5000) return json({ error: 'bad_request' }, 400);
+    const bad = body.songs.find((s) => !isSong(s));
+    if (bad) {
+      console.error('[sync] canzone non valida', JSON.stringify(bad).slice(0, 300));
       return json({ error: 'bad_request' }, 400);
     }
-    incoming = body.songs;
-  } catch {
+    incoming = body.songs as Song[];
+  } catch (e) {
+    console.error('[sync] corpo non leggibile', e);
     return json({ error: 'bad_request' }, 400);
   }
 
-  // Scrittura "ottimistica": se un altro telefono ha salvato nel frattempo, rileggo e riunisco.
-  for (let i = 0; i < MAX_TRIES; i++) {
-    const { songs: stored, etag } = await readStored();
-    const merged = mergeSongs(stored, incoming);
-    if (etag && sameSongs(stored, merged)) return json({ songs: merged });
-    try {
-      await put(PATH, JSON.stringify(merged), {
-        access: 'private',
-        contentType: 'application/json',
-        addRandomSuffix: false,
-        allowOverwrite: true,
-        ...(etag ? { ifMatch: etag } : {}),
-      });
-      return json({ songs: merged });
-    } catch (e) {
-      if (e instanceof BlobPreconditionFailedError) continue;
-      throw e;
+  try {
+    // Scrittura "ottimistica": se un altro telefono ha salvato nel frattempo, rileggo e riunisco.
+    for (let i = 0; i < MAX_TRIES; i++) {
+      const { songs: stored, etag } = await readStored();
+      const merged = mergeSongs(stored, incoming);
+      if (etag && sameSongs(stored, merged)) return json({ songs: merged });
+      try {
+        await write(merged, etag);
+        return json({ songs: merged });
+      } catch (e) {
+        if (e instanceof BlobPreconditionFailedError) {
+          console.warn(`[sync] ETag cambiato (tentativo ${i + 1}), rileggo e riunisco`);
+          continue;
+        }
+        throw e;
+      }
     }
+    // Ultima spiaggia: rileggo, riunisco e salvo senza controllo (con due telefoni il rischio è minimo).
+    console.warn('[sync] ETag sempre diverso: salvo senza controllo');
+    const { songs: stored } = await readStored();
+    const merged = mergeSongs(stored, incoming);
+    await write(merged, null);
+    return json({ songs: merged });
+  } catch (e) {
+    console.error('[sync] errore di lettura/scrittura del Blob', e);
+    return json({ error: 'storage', detail: String((e as Error)?.message ?? e).slice(0, 200) }, 500);
   }
-  return json({ error: 'busy' }, 409);
 }

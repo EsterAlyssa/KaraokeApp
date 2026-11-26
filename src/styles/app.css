@@ -657,6 +657,9 @@ input::placeholder {
   gap: 10px;
 }
 .song {
+  width: 100%;
+  text-align: left;
+  color: var(--ink);
   background: var(--glass);
   border-radius: 20px;
   padding: 14px 16px 12px;
@@ -673,7 +676,11 @@ input::placeholder {
   flex: 1;
   min-width: 0;
 }
+.song__artist {
+  display: block;
+}
 .song__title {
+  display: block;
   margin: 0 0 2px;
   font-size: 19px;
   font-weight: 700;
@@ -799,6 +806,14 @@ input::placeholder {
   font-size: 16px;
   font-weight: 700;
   color: var(--danger);
+}
+.last-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-weight: 400;
 }
 .stepper {
   display: flex;

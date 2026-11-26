@@ -39,22 +39,26 @@ export const signature = (songs: Song[]) =>
 export async function syncSongs(
   songs: Song[],
   code: string,
-): Promise<{ status: SyncStatus; songs?: Song[] }> {
+): Promise<{ status: SyncStatus; songs?: Song[]; detail?: string }> {
   if (!code) return { status: 'off' };
   if (!navigator.onLine) return { status: 'offline' };
   try {
+    // Il codice va nel corpo, non in un header: gli header non accettano lettere accentate.
     const r = await fetch('/api/sync', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-family-code': code },
-      body: JSON.stringify({ songs }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code, songs }),
     });
     if (r.status === 401) return { status: 'wrong_code' };
     if (r.status === 503) return { status: 'not_configured' };
-    if (!r.ok) return { status: 'error' };
+    if (!r.ok) {
+      const body = (await r.json().catch(() => ({}))) as { error?: string };
+      return { status: 'error', detail: `${r.status}${body.error ? ` ${body.error}` : ''}` };
+    }
     const body = (await r.json()) as { songs: Song[] };
     return { status: 'ok', songs: body.songs };
-  } catch {
-    return { status: navigator.onLine ? 'error' : 'offline' };
+  } catch (e) {
+    return navigator.onLine ? { status: 'error', detail: String((e as Error)?.message ?? e) } : { status: 'offline' };
   }
 }
 

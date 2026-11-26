@@ -6,6 +6,7 @@ export function SyncSettings({
   code,
   status,
   lastSync,
+  detail,
   onSaveCode,
   onSyncNow,
   onBack,
@@ -13,6 +14,8 @@ export function SyncSettings({
   code: string;
   status: SyncStatus;
   lastSync: number | null;
+  /** Motivo tecnico dell'errore, per capire cosa non va. */
+  detail: string;
   onSaveCode: (code: string) => void;
   onSyncNow: () => void;
   onBack: () => void;
@@ -57,6 +60,12 @@ export function SyncSettings({
             {status === 'ok' && time ? ` alle ${time}` : ''}
           </span>
         </div>
+        {status === 'error' && detail && <p className="muted small">Dettaglio: {detail}</p>}
+        {status === 'wrong_code' && (
+          <p className="muted small">
+            Deve essere uguale al codice messo su Vercel (FAMILY_CODE). Maiuscole e spazi ai lati non contano.
+          </p>
+        )}
 
         <button type="submit" className="btn-primary">
           Salva codice
