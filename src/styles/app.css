@@ -980,3 +980,9 @@ body {
   font-size: clamp(14px, min(2.2dvh, 4.2vw), 18px);
   white-space: nowrap;
 }
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  box-shadow: none;
+  cursor: not-allowed;
+}

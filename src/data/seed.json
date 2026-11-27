@@ -13,6 +13,30 @@
     "score": 0
   },
   {
+    "id": "abbracciame",
+    "title": "Abbracciame",
+    "artist": "Andrea Sannino",
+    "key": 0,
+    "singers": [
+      "papa"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "acqua-e-sale",
+    "title": "Acqua e sale",
+    "artist": "Mina e Adriano Celentano",
+    "key": 0,
+    "singers": [
+      "papa"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "al-mio-paese",
     "title": "Al mio paese",
     "artist": "Serena Brancale ft Delia ft Levante",
@@ -62,12 +86,38 @@
     "score": 0
   },
   {
+    "id": "amami-amami",
+    "title": "Amami amami",
+    "artist": "Mina e Adriano Celentano",
+    "key": 0,
+    "singers": [
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "amore-che-torni",
+    "title": "Amore che torni",
+    "artist": "Negramaro",
+    "key": 0,
+    "singers": [
+      "insieme",
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "anche-un-uomo",
     "title": "Anche un uomo",
     "artist": "Mina",
     "key": -2,
     "singers": [
-      "insieme"
+      "insieme",
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -153,7 +203,8 @@
     "artist": "Enrique Iglesias",
     "key": 0,
     "singers": [
-      "insieme"
+      "insieme",
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -244,12 +295,36 @@
     "score": 0
   },
   {
+    "id": "calma",
+    "title": "Calma",
+    "artist": "Pedro Capó ft. Farruko",
+    "key": 0,
+    "singers": [
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "canto-d-amore",
     "title": "Canto d'amore",
     "artist": "Angelina Mango ft Marco Mengoni",
     "key": -3,
     "singers": [
       "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "cercami",
+    "title": "Cercami",
+    "artist": "Renato Zero",
+    "key": 0,
+    "singers": [
+      "papa"
     ],
     "moods": [],
     "lastSung": null,
@@ -342,6 +417,30 @@
     "score": 0
   },
   {
+    "id": "come-una-fotografia",
+    "title": "Come una fotografia",
+    "artist": "Francesco Renga",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "como-suena-el-corazon",
+    "title": "Como suena el corazón",
+    "artist": "Gigi D'Alessio",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "counting-stars",
     "title": "Counting stars",
     "artist": "One Republic",
@@ -371,7 +470,20 @@
     "artist": "Tazenda",
     "key": 0,
     "singers": [
-      "insieme"
+      "insieme",
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "dance-monkey",
+    "title": "Dance monkey",
+    "artist": "Tones and I",
+    "key": -3,
+    "singers": [
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -384,6 +496,30 @@
     "key": 0,
     "singers": [
       "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "diamante",
+    "title": "Diamante",
+    "artist": "Zucchero",
+    "key": 0,
+    "singers": [
+      "papa"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "dimmi-che-non-vuoi-morire",
+    "title": "Dimmi che non vuoi morire",
+    "artist": "Patty Pravo",
+    "key": 0,
+    "singers": [
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -426,6 +562,18 @@
     "score": 0
   },
   {
+    "id": "domani",
+    "title": "Domani",
+    "artist": "",
+    "key": 0,
+    "singers": [
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "don-t-know-why",
     "title": "Don't know why",
     "artist": "Norah Jones",
@@ -448,6 +596,18 @@
     "moods": [
       "gruppo"
     ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "dove-si-va",
+    "title": "Dove si va",
+    "artist": "Nomadi",
+    "key": 0,
+    "singers": [
+      "papa"
+    ],
+    "moods": [],
     "lastSung": null,
     "score": 0
   },
@@ -500,6 +660,19 @@
     "score": 0
   },
   {
+    "id": "e-rubero-per-te-la-luna",
+    "title": "E ruberò per te la luna",
+    "artist": "Negramaro",
+    "key": 0,
+    "singers": [
+      "insieme",
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "eco",
     "title": "Eco",
     "artist": "Joan Thiele",
@@ -512,12 +685,25 @@
     "score": 0
   },
   {
+    "id": "ed-ero-contentissimo",
+    "title": "Ed ero contentissimo",
+    "artist": "Jovanotti",
+    "key": 0,
+    "singers": [
+      "papa"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "el-mismo-sol",
     "title": "El mismo sol",
     "artist": "Alvaro Soler",
     "key": 0,
     "singers": [
-      "insieme"
+      "insieme",
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -527,6 +713,18 @@
     "id": "eppure-sentire",
     "title": "Eppure sentire",
     "artist": "Elisa",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "estate",
+    "title": "Estate",
+    "artist": "Negramaro",
     "key": 0,
     "singers": [
       "insieme"
@@ -566,6 +764,18 @@
     "key": -2,
     "singers": [
       "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "fatti-avanti-amore",
+    "title": "Fatti avanti amore",
+    "artist": "Nek",
+    "key": 0,
+    "singers": [
+      "insieme"
     ],
     "moods": [],
     "lastSung": null,
@@ -650,6 +860,18 @@
     "score": 0
   },
   {
+    "id": "giudizi-universali",
+    "title": "Giudizi universali",
+    "artist": "Samuele Bersani",
+    "key": 0,
+    "singers": [
+      "papa"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "gli-ostacoli-del-cuore",
     "title": "Gli ostacoli del cuore",
     "artist": "Elisa",
@@ -665,6 +887,19 @@
     "id": "grande-grande-grande",
     "title": "Grande, grande, grande",
     "artist": "Mina",
+    "key": 0,
+    "singers": [
+      "insieme",
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "guantanamera",
+    "title": "Guantanamera",
+    "artist": "",
     "key": 0,
     "singers": [
       "insieme"
@@ -746,6 +981,18 @@
     "score": 0
   },
   {
+    "id": "i-cieli-d-irlanda",
+    "title": "I cieli d'Irlanda",
+    "artist": "Fiorella Mannoia",
+    "key": 0,
+    "singers": [
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "i-don-t-want-to-miss-a-thing",
     "title": "I don't want to miss a thing",
     "artist": "Aerosmith",
@@ -782,6 +1029,54 @@
     "score": 0
   },
   {
+    "id": "il-bene",
+    "title": "Il bene",
+    "artist": "Francesco Renga",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "il-gioco",
+    "title": "Il gioco",
+    "artist": "Negramaro",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "il-mio-corpo-che-cambia",
+    "title": "Il mio corpo che cambia",
+    "artist": "Litfiba",
+    "key": 0,
+    "singers": [
+      "papa"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "il-mio-diario-degli-errori",
+    "title": "Il mio diario degli errori",
+    "artist": "Michele Bravi",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "in-the-end",
     "title": "In the end",
     "artist": "Linkin park",
@@ -806,6 +1101,19 @@
     "score": 0
   },
   {
+    "id": "in-vacanza-da-una-vita",
+    "title": "In vacanza da una vita",
+    "artist": "Irene Grandi",
+    "key": 0,
+    "singers": [
+      "insieme",
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "io-e-la-mia-signorina",
     "title": "Io e la mia signorina",
     "artist": "Neffa",
@@ -816,6 +1124,18 @@
     "moods": [
       "gruppo"
     ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "iris",
+    "title": "Iris",
+    "artist": "Biagio Antonacci",
+    "key": 1,
+    "singers": [
+      "mamma"
+    ],
+    "moods": [],
     "lastSung": null,
     "score": 0
   },
@@ -846,12 +1166,37 @@
     "score": 0
   },
   {
+    "id": "karaoke",
+    "title": "Karaoke",
+    "artist": "Boomdabash e Alessandra Amoroso",
+    "key": -3,
+    "singers": [
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "knockin-on-heaven-s-door",
     "title": "Knockin' on heaven's door",
     "artist": "Guns N' Roses",
     "key": 0,
     "singers": [
       "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "l-immenso",
+    "title": "L'immenso",
+    "artist": "Negramaro",
+    "key": 0,
+    "singers": [
+      "insieme",
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -882,12 +1227,38 @@
     "score": 0
   },
   {
+    "id": "l-ultima-notte-al-mondo",
+    "title": "L'ultima notte al mondo",
+    "artist": "Tiziano Ferro",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "l-uomo-che-amava-le-donne",
+    "title": "L'uomo che amava le donne",
+    "artist": "Nina Zilli",
+    "key": -3,
+    "singers": [
+      "insieme",
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "la-camisa-negra",
     "title": "La camisa negra",
     "artist": "Juanes",
     "key": 0,
     "singers": [
-      "insieme"
+      "insieme",
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -906,12 +1277,60 @@
     "score": 0
   },
   {
+    "id": "la-collina-dei-ciliegi",
+    "title": "La collina dei ciliegi",
+    "artist": "Lucio Battisti",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "la-compagnia",
+    "title": "La compagnia",
+    "artist": "Lucio Battisti",
+    "key": 0,
+    "singers": [
+      "papa"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "la-distanza-di-un-amore",
     "title": "La distanza di un amore",
     "artist": "Alex Baroni",
     "key": 0,
     "singers": [
       "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "la-donna-del-mio-amico",
+    "title": "La donna del mio amico",
+    "artist": "Pooh",
+    "key": 0,
+    "singers": [
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "la-luna-e-la-gatta",
+    "title": "La luna e la gatta",
+    "artist": "Takagi & Ketra ft. Jovanotti, Calcutta e Tommaso Paradiso",
+    "key": 0,
+    "singers": [
+      "ester_papa"
     ],
     "moods": [],
     "lastSung": null,
@@ -955,12 +1374,36 @@
     "score": 0
   },
   {
+    "id": "la-valigia-sul-letto",
+    "title": "La valigia sul letto",
+    "artist": "",
+    "key": 0,
+    "singers": [
+      "papa"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "la-vie-en-rose",
     "title": "La vie en rose",
     "artist": "Louis Armstrong",
     "key": -5,
     "singers": [
       "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "la-vita-com-e",
+    "title": "La vita com'è",
+    "artist": "Max Gazzè",
+    "key": 0,
+    "singers": [
+      "papa"
     ],
     "moods": [],
     "lastSung": null,
@@ -1032,7 +1475,8 @@
     "artist": "Alvaro Soler",
     "key": 0,
     "singers": [
-      "insieme"
+      "insieme",
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -1125,6 +1569,18 @@
     "score": 0
   },
   {
+    "id": "magnolia",
+    "title": "Magnolia",
+    "artist": "Negrita",
+    "key": 0,
+    "singers": [
+      "papa"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "malavita",
     "title": "Malavita",
     "artist": "Comacose",
@@ -1140,9 +1596,10 @@
     "id": "maledetta-primavera",
     "title": "Maledetta primavera",
     "artist": "Loretta Goggi",
-    "key": 0,
+    "key": -3,
     "singers": [
-      "insieme"
+      "insieme",
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -1179,6 +1636,30 @@
     "key": 0,
     "singers": [
       "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "mentre-tutto-scorre",
+    "title": "Mentre tutto scorre",
+    "artist": "Negramaro",
+    "key": 0,
+    "singers": [
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "meraviglioso",
+    "title": "Meraviglioso",
+    "artist": "Negramaro",
+    "key": 0,
+    "singers": [
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -1326,7 +1807,8 @@
     "artist": "Mina",
     "key": 0,
     "singers": [
-      "insieme"
+      "insieme",
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -1350,7 +1832,8 @@
     "artist": "Tiziano Ferro",
     "key": 0,
     "singers": [
-      "insieme"
+      "insieme",
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -1362,7 +1845,8 @@
     "artist": "Biagio Antonacci",
     "key": 0,
     "singers": [
-      "insieme"
+      "insieme",
+      "papa"
     ],
     "moods": [],
     "lastSung": null,
@@ -1386,7 +1870,8 @@
     "artist": "Alex Britti",
     "key": 0,
     "singers": [
-      "insieme"
+      "insieme",
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -1472,6 +1957,18 @@
     "key": 0,
     "singers": [
       "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "pa-ti",
+    "title": "Pa' ti",
+    "artist": "Jennifer Lopez e Maluma",
+    "key": 0,
+    "singers": [
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -1586,6 +2083,42 @@
     "score": 0
   },
   {
+    "id": "quella-carezza-della-sera",
+    "title": "Quella carezza della sera",
+    "artist": "New Trolls",
+    "key": 0,
+    "singers": [
+      "papa_mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "raccontami",
+    "title": "Raccontami",
+    "artist": "Francesco Renga",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "ragazzo-fortunato",
+    "title": "Ragazzo fortunato",
+    "artist": "Jovanotti",
+    "key": 0,
+    "singers": [
+      "papa"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "resta-cu-me",
     "title": "Resta cu me",
     "artist": "Pino Daniele",
@@ -1684,6 +2217,18 @@
     "score": 0
   },
   {
+    "id": "sale-amore-e-vento",
+    "title": "Sale, amore e vento",
+    "artist": "Tiromancino",
+    "key": 0,
+    "singers": [
+      "papa"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "saliro",
     "title": "Salirò",
     "artist": "Daniele Silvestri",
@@ -1739,6 +2284,19 @@
     "artist": "Mina",
     "key": 0,
     "singers": [
+      "insieme",
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "sei",
+    "title": "Sei",
+    "artist": "Negramaro",
+    "key": 0,
+    "singers": [
       "insieme"
     ],
     "moods": [],
@@ -1758,12 +2316,25 @@
     "score": 0
   },
   {
+    "id": "senza-pieta",
+    "title": "Senza pietà",
+    "artist": "Anna Oxa",
+    "key": -3,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "sere-nere",
     "title": "Sere nere",
     "artist": "Tiziano Ferro",
     "key": 0,
     "singers": [
-      "insieme"
+      "insieme",
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -1818,6 +2389,18 @@
     "score": 0
   },
   {
+    "id": "sigarette",
+    "title": "Sigarette",
+    "artist": "Lucio Corsi",
+    "key": 0,
+    "singers": [
+      "papa"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "so-easy-to-fall-in-love",
     "title": "So easy (to fall in love)",
     "artist": "Olivia Dean",
@@ -1835,7 +2418,20 @@
     "artist": "Alvaro Soler",
     "key": 0,
     "singers": [
-      "insieme"
+      "insieme",
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "sognami",
+    "title": "Sognami",
+    "artist": "Biagio Antonacci",
+    "key": 0,
+    "singers": [
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -1880,6 +2476,30 @@
     "score": 0
   },
   {
+    "id": "spaccacuore",
+    "title": "Spaccacuore",
+    "artist": "Samuele Bersani",
+    "key": 0,
+    "singers": [
+      "papa"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "spiagge",
+    "title": "Spiagge",
+    "artist": "Renato Zero",
+    "key": 0,
+    "singers": [
+      "papa"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "splash",
     "title": "Splash",
     "artist": "Colapasce e Di Martino",
@@ -1912,6 +2532,30 @@
     "key": 0,
     "singers": [
       "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "ti-lascero",
+    "title": "Ti lascerò",
+    "artist": "Anna Oxa e Fausto Leali",
+    "key": 0,
+    "singers": [
+      "papa_mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "ti-volevo-dedicare",
+    "title": "Ti volevo dedicare",
+    "artist": "Rocco Hunt ft. J-Ax e Boomdabash",
+    "key": 0,
+    "singers": [
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -1956,6 +2600,18 @@
     "score": 0
   },
   {
+    "id": "tutta-la-vita",
+    "title": "Tutta la vita",
+    "artist": "Alex Britti",
+    "key": 0,
+    "singers": [
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "tutto-quello-che-un-uomo",
     "title": "Tutto quello che un uomo",
     "artist": "Sergio Cammariere",
@@ -1974,6 +2630,18 @@
     "key": -2,
     "singers": [
       "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "una-volta-ancora",
+    "title": "Una volta ancora",
+    "artist": "Fred De Palma ft. Ana Mena",
+    "key": 0,
+    "singers": [
+      "mamma"
     ],
     "moods": [],
     "lastSung": null,
@@ -2033,6 +2701,18 @@
     "id": "vent-anni",
     "title": "Vent'anni",
     "artist": "Massimo Ranieri",
+    "key": 0,
+    "singers": [
+      "mamma"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "vento-di-passione",
+    "title": "Vento di passione",
+    "artist": "Pino Daniele ft. Giorgia",
     "key": 0,
     "singers": [
       "mamma"
@@ -2161,6 +2841,18 @@
     "moods": [
       "gruppo"
     ],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "yo-contigo-tu-conmigo",
+    "title": "Yo contigo, tú conmigo",
+    "artist": "Morat ft. Álvaro Soler",
+    "key": 0,
+    "singers": [
+      "mamma"
+    ],
+    "moods": [],
     "lastSung": null,
     "score": 0
   },

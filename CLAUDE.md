@@ -33,7 +33,7 @@ di chi canta, dell'atmosfera e di cosa si è cantato di recente.
 | Mockup interattivo (canvas Design) | https://claude.ai/artifact/MRqQUyhtPGPqzRv4C3xhd5 — artboard `Main.dc.html` (tema giorno) e `Notte.dc.html` (tema notte), 390×844 |
 | Tema colori Material (export Material Theme Builder, seed `#A8EBF1`) | `design/material-theme.json` |
 | Token colore per Penpot (palette tonali + schemi) | `design/penpot-tokens.json` |
-| Canzoni originali (fonte dell'import) | Notion › Karaoke › *Con mamma*, *Mie*, *Solo mamma*, *Di gruppo*, *Vale* + due liste vecchie incollate da Ester (tutto in `scripts/notion-import.mjs`). Papà non ha ancora una lista. |
+| Canzoni originali (fonte dell'import) | Notion › Karaoke › *Con mamma*, *Mie*, *Solo mamma*, *Di gruppo*, *Vale* + liste vecchie incollate da Ester (duetti con la mamma, solo sue, "Mamma", "Papà"): tutto in `scripts/notion-import.mjs`. |
 | App online (Vercel) | progetto `karaoke-di-casa` nel team *esteralyssas-projects*, collegato a GitHub: **ogni push su `main` pubblica da solo** |
 
 Il mockup è il riferimento per l'aspetto; il comportamento vero ora sta nel codice.
@@ -64,8 +64,10 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
   parte da `src/data/seed.json`. L'app funziona sempre offline; la sync è un di più.
 - **Aggiungere canzoni al seed** (es. nuove liste): modificare `scripts/notion-import.mjs`, `npm run seed`,
   e **aumentare `SEED_VERSION`** in `src/lib/storage.ts`. All'apertura i telefoni già in uso ricevono le
-  canzoni nuove e i cantanti/mood nuovi delle canzoni esistenti (`applySeed`, con `updatedAt` aggiornato
-  così la sync le propaga); titoli, tonalità, date e gradimento già sul telefono non vengono toccati.
+  canzoni nuove (`applySeed`, con `updatedAt` aggiornato così la sync le propaga). Canzoni **mai toccate**
+  sul telefono (senza `updatedAt`): prendono la versione del seed (tonalità e cantanti corretti arrivano).
+  Canzoni già cantate/modificate: si aggiungono solo cantanti/mood nuovi; titolo, tonalità, date e
+  gradimento del telefono non vengono toccati.
 - **Sync tra i telefoni:**
   - Server: `api/sync.ts` su Vercel. Nel Blob store **privato** `karaoke-canzoni` (team
     esteralyssas-projects, regione iad1) salva due file JSON: `karaoke/songs.json` (canzoni) e
@@ -99,7 +101,7 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 - **Tema:** giorno/notte; al primo avvio segue il tema del telefono, poi ricorda la scelta.
 
 ## Schermate (dal mockup)
-1. **Home** — "Chi canta?" (Ester · Mamma · Insieme), "Che atmosfera?" (mood multipli),
+1. **Home** — "Chi canta?" (bollini Ester · Mamma · Papà · Vale, anche più insieme), "Che atmosfera?" (mood multipli),
    interruttore **"Solo tonalità originale"**, pulsante **Pesca**, pulsanti sync (nuvola) e tema sole/luna.
 2. **Pescata** — card della canzone (titolo, artista, tonalità, ultima volta cantata,
    chi canta). Swipe/pulsanti: *Si canta!* oppure scarta e *Pesca la prossima*.
@@ -116,7 +118,10 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 { id,       // stringa (slug del titolo per le canzoni importate, UUID per le nuove)
   title, artist,
   key,      // tonalità: intero rispetto all'originale (0 = Originale, −2, +1…)
-  singers,  // ['ester' | 'mamma' | 'insieme' (Ester+mamma) | 'vale' (Ester+Vale, "Con Vale")]
+  singers,  // chi la può cantare, una o più voci tra:
+            // 'ester' | 'mamma' | 'papa'                         (da soli)
+            // 'insieme' (Ester+mamma) | 'vale' (Ester+Vale)       (id storici, non rinominare: dati già sincronizzati)
+            // 'ester_papa' (Ester+papà) | 'papa_mamma' (papà+mamma)
   moods,    // ['allegra' | 'ballare' | 'gruppo']
   lastSung, // data ultima volta cantata 'YYYY-MM-DD', null = mai cantata
   score,    // gradimento: +1 quando si canta, −1 quando si scarta
@@ -124,10 +129,13 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 ```
 
 ## Regole di pesca (decise)
-- Filtra per cantante scelto; i **mood si combinano in OR** (basta che la canzone ne abbia uno).
-- **Insieme** = duetti di Ester con la mamma. **Con Vale** = duetti di Ester con Vale.
-- "Chi canta?" mostra una colonna per persona (`SINGERS` in `src/lib/types.ts`): i cerchi si stringono
-  in altezza e in larghezza. Con 4 persone la home sta ancora in 375×600.
+- **"Chi canta?" = persone, non combinazioni**: 4 bollini (`PEOPLE`: Ester, Mamma, Papà, Vale) che si
+  accendono anche insieme. `singerFor(persone)` trova la combinazione in `SINGERS` (es. Ester+Mamma →
+  'insieme', "Ester e mamma"); il nome compare accanto al titolo. Combinazione senza canzoni (es. Vale da
+  sola, tre persone) → "Nessuna canzone per questa combinazione" e Pesca disattivato. Per aggiungere una
+  coppia nuova basta una riga in `SINGERS`. Default all'apertura: Ester + Mamma.
+- Filtra per la combinazione scelta; i **mood si combinano in OR** (basta che la canzone ne abbia uno).
+- I bollini si stringono in altezza e in larghezza: con 4 persone la home sta ancora in 375×600.
 - **Modalità serata** attiva di default: niente ripetizioni nella stessa serata
   (cantate e scartate non tornano).
 - Pescata casuale pesata: peso = `max(0.5, 3 + score) × (1 + min(giorni, 90) / 30)`.
@@ -199,3 +207,10 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
   tonalità del database tenute, artisti corretti per le liste vecchie (es. Le tasche piene di sassi →
   Jovanotti, La camisa negra → Juanes, Mary → Gemelli Diversi). Esclusa "Heaven (" (riga tagliata).
   Papà: nessuna lista su Notion, non aggiunto. `SEED_VERSION` = 2.
+- 2026-11-27 — "Chi canta?" diventa a persone (Ester, Mamma, Papà, Vale) con scelta multipla, al posto
+  di un cerchio per ogni combinazione (proposta di Ester). Aggiunti papà (18 da solo, 2 con la mamma:
+  Quella carezza della sera, Ti lascerò; 1 con Ester: La luna e la gatta — le altre in attesa di conferma),
+  la lista "Mamma" e il resto dei duetti con la mamma (Renga, Negramaro…): 236 canzoni. Tonalità −3 da
+  lista per Maledetta primavera, L'uomo che amava le donne, Senza pietà, Karaoke, Dance monkey; Iris +1.
+  Artisti incerti: Sigarette (messo Lucio Corsi), La valigia sul letto e Domani (vuoti), Iris (messo
+  Biagio Antonacci). `SEED_VERSION` = 3 (le canzoni mai toccate prendono la versione nuova).

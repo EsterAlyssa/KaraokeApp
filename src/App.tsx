@@ -15,7 +15,7 @@ import {
   type Theme,
 } from './lib/storage';
 import { getCode, setCode as storeCode, signature, syncAll, type SyncStatus } from './lib/sync';
-import type { MoodId, SingerId, Song } from './lib/types';
+import { singerFor, type MoodId, type PersonId, type Song } from './lib/types';
 import { Home } from './screens/Home';
 import { Draw, type DrawPhase } from './screens/Draw';
 import { SongList } from './screens/SongList';
@@ -32,7 +32,9 @@ export default function App() {
   const [songs, setSongs] = useState<Song[]>(loadSongs);
   const [night, setNight] = useState(loadNight);
   const [screen, setScreen] = useState<Screen>('home');
-  const [singer, setSinger] = useState<SingerId>('insieme');
+  const [people, setPeople] = useState<PersonId[]>(['ester', 'mamma']);
+  /** La combinazione scelta (es. Ester + mamma = "insieme"); null se non esiste. */
+  const singer = singerFor(people);
   const [moods, setMoods] = useState<MoodId[]>([]);
   const [onlyOriginal, setOnlyOriginal] = useState(loadOnlyOriginal);
   const [cur, setCur] = useState<string | null>(null);
@@ -123,7 +125,7 @@ export default function App() {
   /** Pesca con la serata `n` (già aggiornata con l'ultima canzone vista, se serve). */
   const doDraw = (list: Song[], n: NightState) => {
     const num = n.draws + 1;
-    const r = draw(list, { singer, moods, onlyOriginal, serata: n.serata, seen: seenIds(n) }, num, cur);
+    const r = singer ? draw(list, { singer, moods, onlyOriginal, serata: n.serata, seen: seenIds(n) }, num, cur) : null;
     setScreen('draw');
     if (!r) {
       setPhase('empty');
@@ -187,8 +189,8 @@ export default function App() {
           syncStatus={syncStatus}
           onSync={() => setScreen('sync')}
           songs={songs}
-          singer={singer}
-          onSinger={setSinger}
+          people={people}
+          onPeople={setPeople}
           moods={moods}
           onMoods={setMoods}
           onlyOriginal={onlyOriginal}
@@ -235,13 +237,13 @@ export default function App() {
         <AddSong
           key={editing.id}
           initial={editing}
-          defaultSinger={singer}
+          defaultSinger={singer ?? 'ester'}
           onBack={() => setScreen('list')}
           onSave={editSong}
         />
       )}
 
-      {screen === 'add' && <AddSong defaultSinger={singer} onBack={() => setScreen('home')} onSave={addSong} />}
+      {screen === 'add' && <AddSong defaultSinger={singer ?? 'ester'} onBack={() => setScreen('home')} onSave={addSong} />}
 
       {screen === 'sync' && (
         <SyncSettings

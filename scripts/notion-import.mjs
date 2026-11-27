@@ -7,6 +7,7 @@
 //   "Solo mamma" -> mamma
 //   "Di gruppo"  -> insieme + mood "gruppo"
 //   "Vale"       -> vale (duetti di Ester con Vale), esportata il 2026-11-27
+//   liste vecchie "Mamma" -> mamma, "Papà" -> papa (alcune sono duetti: vedi sotto)
 // Più due "liste vecchie" incollate da Ester il 2026-11-27 (vedi sotto: vecchieInsieme, vecchieMie).
 // Le canzoni presenti in più liste vengono unite (stesso titolo); la tonalità resta quella
 // della prima lista che la contiene (le liste Notion vengono prima: sono le più aggiornate).
@@ -186,10 +187,58 @@ const vecchieInsieme = [
   ["Luce (tramonti a nord est)", "Elisa", 0], ["Gli ostacoli del cuore", "Elisa", 0], ["Eppure sentire", "Elisa", 0],
   ["Le tasche piene di sassi", "Jovanotti", 0], ["E poi", "Giorgia", 0],
   ["Hoy", "Gloria Estefan", 0], ["La camisa negra", "Juanes", 0],
-  ["Maledetta primavera", "Loretta Goggi", 0],
+  ["Maledetta primavera", "Loretta Goggi", -3],
   ["Fuori c'è il sole", "Lorenzo Fragola", 0], ["Luce che entra", "Lorenzo Fragola", 0],
   ["Neve", "Mina", 0], ["Grande, grande, grande", "Mina", 0], ["Se telefonando", "Mina", 0],
   ["La voce del silenzio", "Mina", 0],
+  // Seconda parte dell'elenco (incollata completa il 2026-11-27)
+  ["Il bene", "Francesco Renga", 0], ["Raccontami", "Francesco Renga", 0],
+  ["Come una fotografia", "Francesco Renga", 0],
+  ["Amore che torni", "Negramaro", 0], ["Sei", "Negramaro", 0], ["L'immenso", "Negramaro", 0],
+  ["Estate", "Negramaro", 0], ["Il gioco", "Negramaro", 0], ["E ruberò per te la luna", "Negramaro", 0],
+  ["L'uomo che amava le donne", "Nina Zilli", -3], ["Fatti avanti amore", "Nek", 0],
+  ["L'ultima notte al mondo", "Tiziano Ferro", 0],
+  ["La collina dei ciliegi", "Lucio Battisti", 0], ["Il mio diario degli errori", "Michele Bravi", 0],
+  ["Senza pietà", "Anna Oxa", -3], ["Guantanamera", "", 0],
+  ["In vacanza da una vita", "Irene Grandi", 0], ["Como suena el corazón", "Gigi D'Alessio", 0],
+];
+
+// Lista vecchia "Mamma" (canzoni che canta la mamma da sola). Titoli senza artista: artisti aggiunti.
+// Le tonalità scritte come "- 3" sono −3. Dove la canzone era già nei duetti, si aggiunge solo la mamma.
+const vecchieMamma = [
+  ["La rondine", "Mango", 0], ["Vento di passione", "Pino Daniele ft. Giorgia", 0],
+  ["Resta cu me", "Pino Daniele", 0], ["Mentre tutto scorre", "Negramaro", 0], ["Meraviglioso", "Negramaro", 0],
+  ["E ruberò per te la luna", "Negramaro", 0], ["L'immenso", "Negramaro", 0], ["Amore che torni", "Negramaro", 0],
+  ["Cuore e vento", "Tazenda", 0], ["Neve", "Mina", 0], ["Anche un uomo", "Mina", -2],
+  ["Grande, grande, grande", "Mina", 0], ["L'uomo che amava le donne", "Nina Zilli", -3],
+  ["Sofia", "Alvaro Soler", 0], ["El mismo sol", "Alvaro Soler", 0],
+  ["Yo contigo, tú conmigo", "Morat ft. Álvaro Soler", 0], ["Libre", "Alvaro Soler", 0],
+  ["Calma", "Pedro Capó ft. Farruko", 0], ["Bailando", "Enrique Iglesias", 0],
+  ["Ti volevo dedicare", "Rocco Hunt ft. J-Ax e Boomdabash", 0], ["I cieli d'Irlanda", "Fiorella Mannoia", 0],
+  ["In vacanza da una vita", "Irene Grandi", 0], ["Maledetta primavera", "Loretta Goggi", -3],
+  ["Pa' ti", "Jennifer Lopez e Maluma", 0], ["Sere nere", "Tiziano Ferro", 0],
+  ["Non me lo so spiegare", "Tiziano Ferro", 0], ["Sognami", "Biagio Antonacci", 0],
+  ["Iris", "Biagio Antonacci", 1], ["Amami amami", "Mina e Adriano Celentano", 0],
+  ["Oggi sono io", "Alex Britti", 0], ["Una volta ancora", "Fred De Palma ft. Ana Mena", 0],
+  ["Karaoke", "Boomdabash e Alessandra Amoroso", -3], ["La camisa negra", "Juanes", 0],
+  ["Domani", "", 0], ["Dance monkey", "Tones and I", -3], ["La donna del mio amico", "Pooh", 0],
+  ["Se telefonando", "Mina", 0], ["Dimmi che non vuoi morire", "Patty Pravo", 0],
+  ["Tutta la vita", "Alex Britti", 0],
+];
+
+// Lista vecchia "Papà" (solo titoli): artisti aggiunti, in parte cercati online.
+// 4° elemento facoltativo: duetto ("papa_mamma" = papà e mamma, "ester_papa" = Ester e papà).
+// Incerti: "Sigarette" (stesso titolo per più artisti), "La valigia sul letto" (artista non trovato).
+const papa = [
+  ["Magnolia", "Negrita", 0], ["Sigarette", "Lucio Corsi", 0], ["Sale, amore e vento", "Tiromancino", 0],
+  ["La vita com'è", "Max Gazzè", 0], ["Ragazzo fortunato", "Jovanotti", 0], ["La compagnia", "Lucio Battisti", 0],
+  ["La valigia sul letto", "", 0], ["Cercami", "Renato Zero", 0], ["Spiagge", "Renato Zero", 0],
+  ["Spaccacuore", "Samuele Bersani", 0], ["Giudizi universali", "Samuele Bersani", 0], ["Diamante", "Zucchero", 0],
+  ["Il mio corpo che cambia", "Litfiba", 0], ["Ed ero contentissimo", "Jovanotti", 0], ["Dove si va", "Nomadi", 0],
+  ["Quella carezza della sera", "New Trolls", 0, "papa_mamma"], ["Non vivo più senza te", "Biagio Antonacci", 0],
+  ["La luna e la gatta", "Takagi & Ketra ft. Jovanotti, Calcutta e Tommaso Paradiso", 0, "ester_papa"],
+  ["Abbracciame", "Andrea Sannino", 0], ["Acqua e sale", "Mina e Adriano Celentano", 0],
+  ["Ti lascerò", "Anna Oxa e Fausto Leali", 0, "papa_mamma"],
 ];
 
 // Liste vecchie solo di Ester. Solo le canzoni che non erano già in "Mie"
@@ -208,9 +257,10 @@ const slug = (s) =>
   s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 const songs = new Map();
-const add = (list, singer, mood) => {
-  for (const [title, artist, key] of list) {
+const add = (list, defaultSinger, mood) => {
+  for (const [title, artist, key, who] of list) {
     const id = slug(title);
+    const singer = who ?? defaultSinger;
     const s = songs.get(id) ?? { id, title, artist, key, singers: [], moods: [], lastSung: null, score: 0 };
     if (!s.singers.includes(singer)) s.singers.push(singer);
     if (mood && !s.moods.includes(mood)) s.moods.push(mood);
@@ -225,6 +275,8 @@ add(diGruppo, 'insieme', 'gruppo');
 add(vale, 'vale');
 add(vecchieInsieme, 'insieme');
 add(vecchieMie, 'ester');
+add(vecchieMamma, 'mamma');
+add(papa, 'papa');
 
 const out = [...songs.values()].sort((a, b) => a.title.localeCompare(b.title, 'it'));
 writeFileSync(new URL('../src/data/seed.json', import.meta.url), JSON.stringify(out, null, 2) + '\n');

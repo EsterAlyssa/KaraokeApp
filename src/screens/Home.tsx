@@ -2,7 +2,7 @@ import { Icon } from '../components/Icon';
 import { pool } from '../lib/draw';
 import type { Theme } from '../lib/storage';
 import { statusText, type SyncStatus } from '../lib/sync';
-import { MOODS, SINGERS, type MoodId, type SingerId, type Song } from '../lib/types';
+import { MOODS, PEOPLE, singerFor, singerName, type MoodId, type PersonId, type Song } from '../lib/types';
 
 const moodIcon = { allegra: 'sun', ballare: 'note', gruppo: 'group' } as const;
 
@@ -12,8 +12,9 @@ export function Home(props: {
   syncStatus: SyncStatus;
   onSync: () => void;
   songs: Song[];
-  singer: SingerId;
-  onSinger: (s: SingerId) => void;
+  /** Persone scelte in "Chi canta?". */
+  people: PersonId[];
+  onPeople: (p: PersonId[]) => void;
   moods: MoodId[];
   onMoods: (m: MoodId[]) => void;
   onlyOriginal: boolean;
@@ -22,16 +23,21 @@ export function Home(props: {
   onList: () => void;
   onAdd: () => void;
 }) {
-  const { theme, singer, moods, onlyOriginal } = props;
+  const { theme, people, moods, onlyOriginal } = props;
+  const singer = singerFor(people);
   const night = theme === 'night';
-  const n = pool(props.songs, { singer, moods, serata: false, seen: [], onlyOriginal }).length;
+  const n = singer ? pool(props.songs, { singer, moods, serata: false, seen: [], onlyOriginal }).length : 0;
   const filtered = moods.length > 0 || onlyOriginal;
+  const what = n === 1 ? '1 sola canzone' : `${filtered ? '' : 'tutte le '}${n} canzoni`;
+  const extra = `${moods.length ? ' con questo mood' : ''}${onlyOriginal ? ' in tonalità originale' : ''}`;
   const poolText =
-    n === 0
-      ? 'Nessuna canzone con questa scelta'
-      : filtered
-        ? `Pesco tra ${n} canzoni${moods.length ? ' con questo mood' : ''}${onlyOriginal ? ' in tonalità originale' : ''}`
-        : `Pesco tra tutte le ${n} canzoni`;
+    people.length === 0
+      ? 'Scegli chi canta: anche più di una persona'
+      : !singer
+        ? 'Nessuna canzone per questa combinazione'
+        : n === 0
+          ? 'Nessuna canzone con questa scelta'
+          : `Pesco tra ${what}${extra}`;
 
   const toggleMood = (id: MoodId) =>
     props.onMoods(moods.includes(id) ? moods.filter((m) => m !== id) : [...moods, id]);
@@ -65,19 +71,22 @@ export function Home(props: {
       </div>
 
       <section className="stack">
-        <h2 className="h2">Chi canta?</h2>
-        <div className="singers" style={{ gridTemplateColumns: `repeat(${SINGERS.length}, minmax(0, 1fr))` }}>
-          {SINGERS.map((o) => {
-            const sel = singer === o.id;
+        <div className="row-between">
+          <h2 className="h2">Chi canta?</h2>
+          {singer && <span className="muted">{singerName(singer)}</span>}
+        </div>
+        <div className="singers" style={{ gridTemplateColumns: `repeat(${PEOPLE.length}, minmax(0, 1fr))` }}>
+          {PEOPLE.map((o) => {
+            const sel = people.includes(o.id);
             return (
               <button
                 key={o.id}
                 type="button"
                 className="singer"
                 aria-pressed={sel}
-                onClick={() => props.onSinger(o.id)}
+                onClick={() => props.onPeople(sel ? people.filter((p) => p !== o.id) : [...people, o.id])}
               >
-                <span className={`singer__avatar${o.ini.length > 1 ? ' singer__avatar--small' : ''}`}>
+                <span className="singer__avatar">
                   {o.ini}
                   {sel && (
                     <span className="singer__check">
@@ -132,7 +141,7 @@ export function Home(props: {
       </section>
 
       <div className="home__actions">
-        <button type="button" className="btn-primary btn-hero" onClick={props.onDraw}>
+        <button type="button" className="btn-primary btn-hero" onClick={props.onDraw} disabled={n === 0}>
           <Icon name="dice" size={38} stroke={1.5} />
           Pesca
         </button>

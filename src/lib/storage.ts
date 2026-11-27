@@ -34,21 +34,35 @@ function write(key: string, value: unknown) {
  * aggiungono canzoni o cantanti al seed: i telefoni già in uso le ricevono all'apertura.
  *   1 = import iniziale da Notion (133 canzoni)
  *   2 = + lista Vale e liste vecchie di Ester (180 canzoni, cantante "Con Vale")
+ *   3 = + papà (da solo, con la mamma, con Ester), lista "mamma", resto dei duetti con la mamma
  */
-export const SEED_VERSION = 2;
+export const SEED_VERSION = 3;
 const SEED_VER_KEY = 'karaoke.seedver.v1';
 
 /**
- * Porta le novità del seed in un elenco già in uso, senza toccare quello che c'è:
- * le canzoni nuove vengono aggiunte, a quelle esistenti si aggiungono solo cantanti e mood nuovi
- * (titolo, tonalità, date e gradimento restano quelli del telefono).
+ * Porta le novità del seed in un elenco già in uso, senza perdere quello che si è fatto sul telefono:
+ * - canzoni nuove: aggiunte;
+ * - canzoni mai toccate sul telefono (niente `updatedAt`): prendono la versione del seed
+ *   (così arrivano anche tonalità e cantanti corretti);
+ * - canzoni già cantate/modificate: si aggiungono solo cantanti e mood nuovi
+ *   (titolo, tonalità, date e gradimento restano quelli del telefono).
  */
 export function applySeed(stored: Song[], seedSongs: Song[], now = Date.now()): Song[] {
   const byId = new Map(stored.map((s) => [s.id, s]));
+  const same = (a: Song, b: Song) =>
+    a.title === b.title &&
+    a.artist === b.artist &&
+    a.key === b.key &&
+    a.singers.join() === b.singers.join() &&
+    a.moods.join() === b.moods.join();
   for (const s of seedSongs) {
     const cur = byId.get(s.id);
     if (!cur) {
       byId.set(s.id, s);
+      continue;
+    }
+    if (!cur.updatedAt) {
+      if (!same(cur, s)) byId.set(s.id, { ...s, lastSung: cur.lastSung, score: cur.score, updatedAt: now });
       continue;
     }
     const singers = [...new Set([...cur.singers, ...s.singers])];
