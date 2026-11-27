@@ -1,12 +1,12 @@
-/** Le persone che cantano. In home si scelgono una o più persone. */
+/** Le persone che cantano. */
 export type PersonId = 'ester' | 'mamma' | 'papa' | 'vale';
 
 /**
- * Chi canta una canzone: una persona da sola o una coppia.
- * Gli id 'insieme' (Ester + mamma) e 'vale' (Ester + Vale) restano così per compatibilità
- * con i dati già salvati e sincronizzati.
+ * Formato vecchio di "chi canta" (fino al 2026-11-27): una voce per persona o coppia.
+ * Si continua a scriverlo accanto a `people`/`solo` (vedi `legacySingers` in people.ts) così
+ * le versioni vecchie dell'app sui telefoni non ancora aggiornati non si rompono con la sync.
  */
-export type SingerId = 'ester' | 'mamma' | 'papa' | 'insieme' | 'vale' | 'ester_papa' | 'papa_mamma';
+export type LegacySingerId = 'ester' | 'mamma' | 'papa' | 'insieme' | 'vale' | 'ester_papa' | 'papa_mamma';
 export type MoodId = 'allegra' | 'ballare' | 'gruppo';
 
 export interface Song {
@@ -15,8 +15,12 @@ export interface Song {
   artist: string;
   /** Tonalità in semitoni rispetto all'originale (0 = originale). */
   key: number;
-  /** Chi la può cantare: ogni voce è una persona o una coppia (vedi SINGERS). */
-  singers: SingerId[];
+  /** Chi la canta (una o più persone). */
+  people: PersonId[];
+  /** Chi tra loro la canta anche da solo/a. Le altre persone la cantano solo in compagnia. */
+  solo: PersonId[];
+  /** Formato vecchio, derivato da people/solo: non usarlo nel codice nuovo. */
+  singers: LegacySingerId[];
   moods: MoodId[];
   /** Data dell'ultima volta cantata (YYYY-MM-DD), null = mai cantata. */
   lastSung: string | null;
@@ -26,31 +30,14 @@ export interface Song {
   updatedAt?: number;
 }
 
-export const PEOPLE: { id: PersonId; name: string; ini: string }[] = [
-  { id: 'ester', name: 'Ester', ini: 'E' },
-  { id: 'mamma', name: 'Mamma', ini: 'M' },
-  { id: 'papa', name: 'Papà', ini: 'P' },
-  { id: 'vale', name: 'Vale', ini: 'V' },
+export const PEOPLE: { id: PersonId; name: string; ini: string; solo: string }[] = [
+  { id: 'ester', name: 'Ester', ini: 'E', solo: 'da sola' },
+  { id: 'mamma', name: 'Mamma', ini: 'M', solo: 'da sola' },
+  { id: 'papa', name: 'Papà', ini: 'P', solo: 'da solo' },
+  { id: 'vale', name: 'Vale', ini: 'V', solo: 'da solo' },
 ];
 
-/** Tutte le combinazioni che hanno canzoni: da soli e in coppia. */
-export const SINGERS: { id: SingerId; name: string; people: PersonId[] }[] = [
-  { id: 'ester', name: 'Ester', people: ['ester'] },
-  { id: 'mamma', name: 'Mamma', people: ['mamma'] },
-  { id: 'papa', name: 'Papà', people: ['papa'] },
-  { id: 'insieme', name: 'Ester e mamma', people: ['ester', 'mamma'] },
-  { id: 'ester_papa', name: 'Ester e papà', people: ['ester', 'papa'] },
-  { id: 'vale', name: 'Ester e Vale', people: ['ester', 'vale'] },
-  { id: 'papa_mamma', name: 'Papà e mamma', people: ['mamma', 'papa'] },
-];
-
-/** La combinazione corrispondente alle persone scelte (null se non esiste, es. Vale da sola). */
-export function singerFor(people: PersonId[]): SingerId | null {
-  const key = [...people].sort().join('+');
-  return SINGERS.find((s) => [...s.people].sort().join('+') === key)?.id ?? null;
-}
-
-export const singerName = (id: SingerId) => SINGERS.find((s) => s.id === id)?.name ?? id;
+export const personName = (id: PersonId) => PEOPLE.find((p) => p.id === id)?.name ?? id;
 
 export const MOODS: { id: MoodId; name: string }[] = [
   { id: 'allegra', name: 'Allegra' },

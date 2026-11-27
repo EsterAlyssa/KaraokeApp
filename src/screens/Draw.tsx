@@ -2,7 +2,8 @@ import { useRef, useState } from 'react';
 import { TopBar } from '../components/Chip';
 import { Icon } from '../components/Icon';
 import { OLD_EVERY } from '../lib/draw';
-import { daysSince, keyText, relDays, whoText } from '../lib/format';
+import { daysSince, keyText, relDays } from '../lib/format';
+import { whoText } from '../lib/people';
 import type { Song } from '../lib/types';
 
 export type DrawPhase = 'card' | 'done' | 'empty';

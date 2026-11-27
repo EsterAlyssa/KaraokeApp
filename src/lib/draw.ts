@@ -1,9 +1,11 @@
 // Regole di pesca: vedi CLAUDE.md, sezione "Regole di pesca".
 import { daysSince } from './format';
-import type { MoodId, SingerId, Song } from './types';
+import { singsFor } from './people';
+import type { MoodId, PersonId, Song } from './types';
 
 export interface DrawFilters {
-  singer: SingerId;
+  /** Persone scelte in "Chi canta?" (vedi singsFor). */
+  people: PersonId[];
   moods: MoodId[];
   /** Modalità serata: escludi le canzoni già viste stasera. */
   serata: boolean;
@@ -20,7 +22,7 @@ const age = (s: Song) => daysSince(s.lastSung) ?? 9999;
 export function pool(songs: Song[], f: DrawFilters): Song[] {
   return songs.filter(
     (s) =>
-      s.singers.includes(f.singer) &&
+      singsFor(s, f.people) &&
       (f.moods.length === 0 || f.moods.some((m) => s.moods.includes(m))) &&
       (!f.onlyOriginal || s.key === 0) &&
       (!f.serata || !f.seen.includes(s.id)),

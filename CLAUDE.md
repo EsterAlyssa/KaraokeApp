@@ -48,7 +48,7 @@ scripts/gen-theme.mjs   design/material-theme.json -> src/styles/theme.css  (npm
 scripts/notion-import.mjs  liste Notion -> src/data/seed.json             (npm run seed)
 public/                 favicon.svg + icone PWA generate (npm run icons)
 api/sync.ts             funzione Vercel POST /api/sync (unisce e salva su Vercel Blob)
-src/lib/                types, format (date/testi), draw (regole di pesca), storage (localStorage),
+src/lib/                types, people (chi canta: regole, conversione dal formato vecchio), format, draw (pesca), storage,
                         merge (unione canzoni) e night (serata + sua unione), usati da app e server,
                         sync (chiamate a /api/sync)
 src/screens/            Home, Draw (pescata), SongList, AddSong, SyncSettings
@@ -110,7 +110,9 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
    ordinamento (da più tempo / più recenti / A–Z).
 4. **Nuova canzone** — titolo, artista, tonalità, chi la canta, mood → *Salva canzone*.
 5. **Modifica canzone** — si apre toccando una canzone in *Le canzoni*; stesso modulo già compilato,
-   in più "Segna come mai cantata". Tonalità da −12 a +12.
+   in più "Segna come mai cantata". Tonalità da −12 a +12. "Chi la canta": bollini persona (anche più
+   di uno) e, se sono più persone, "Chi la canta anche da solo/a?" (nessuno = solo insieme), con una
+   frase che spiega quando esce in pesca.
 6. **Sincronizza** — pulsante nuvola in home: codice famiglia e stato della sync.
 
 ## Modello dati di una canzone
@@ -118,10 +120,12 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 { id,       // stringa (slug del titolo per le canzoni importate, UUID per le nuove)
   title, artist,
   key,      // tonalità: intero rispetto all'originale (0 = Originale, −2, +1…)
-  singers,  // chi la può cantare, una o più voci tra:
-            // 'ester' | 'mamma' | 'papa'                         (da soli)
-            // 'insieme' (Ester+mamma) | 'vale' (Ester+Vale)       (id storici, non rinominare: dati già sincronizzati)
-            // 'ester_papa' (Ester+papà) | 'papa_mamma' (papà+mamma)
+  people,   // chi la canta: ['ester' | 'mamma' | 'papa' | 'vale'] (una o più persone)
+  solo,     // chi tra loro la canta ANCHE da solo/a ([] = solo insieme)
+  singers,  // FORMATO VECCHIO, derivato da people/solo (legacySingers): serve solo alle versioni vecchie
+            // dell'app ancora sui telefoni. Valori: 'ester'|'mamma'|'papa' (da soli), 'insieme' (Ester+mamma),
+            // 'vale' (Ester+Vale), 'ester_papa', 'papa_mamma'. Il seed.json è ancora in questo formato:
+            // normalizeSong (src/lib/people.ts) lo converte all'apertura e alla sync (gruppo → tutti, nessuno solo).
   moods,    // ['allegra' | 'ballare' | 'gruppo']
   lastSung, // data ultima volta cantata 'YYYY-MM-DD', null = mai cantata
   score,    // gradimento: +1 quando si canta, −1 quando si scarta
@@ -129,12 +133,18 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 ```
 
 ## Regole di pesca (decise)
-- **"Chi canta?" = persone, non combinazioni**: 4 bollini (`PEOPLE`: Ester, Mamma, Papà, Vale) che si
-  accendono anche insieme. `singerFor(persone)` trova la combinazione in `SINGERS` (es. Ester+Mamma →
-  'insieme', "Ester e mamma"); il nome compare accanto al titolo. Combinazione senza canzoni (es. Vale da
-  sola, tre persone) → "Nessuna canzone per questa combinazione" e Pesca disattivato. Per aggiungere una
-  coppia nuova basta una riga in `SINGERS`. Default all'apertura: Ester + Mamma.
-- Filtra per la combinazione scelta; i **mood si combinano in OR** (basta che la canzone ne abbia uno).
+- **"Chi canta?" = persone**: 4 bollini (`PEOPLE`: Ester, Mamma, Papà, Vale), anche più insieme.
+  Regola (`singsFor` in `src/lib/people.ts`, decisa da Ester):
+  - **una persona** → canzoni che quella persona canta **anche da sola** (`solo` la contiene);
+  - **due o più** → canzoni in cui ci sono **tutte** le persone scelte (`people` le contiene tutte),
+    duetti o canzoni che cantano anche separatamente.
+  Esempi: *7 years* = Ester+Vale, solo Ester → esce con "Ester" e con "Ester e Vale".
+  *In the end* = Ester+Vale, nessuno solo → esce solo con "Ester e Vale".
+  **Canzoni di gruppo** = tutte e 4 le persone, nessuno solo → escono con qualsiasi scelta di 2+ persone,
+  così il filtro "Di gruppo" funziona sempre.
+  Nessuna canzone → "Nessuna canzone per questa combinazione" e Pesca disattivato. Default: Ester + Mamma.
+- I **mood si combinano in OR** (basta che la canzone ne abbia uno). Il filtro "Chi canta" in *Le canzoni*
+  usa la stessa regola della pesca.
 - I bollini si stringono in altezza e in larghezza: con 4 persone la home sta ancora in 375×600.
 - **Modalità serata** attiva di default: niente ripetizioni nella stessa serata
   (cantate e scartate non tornano).
@@ -179,16 +189,15 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 **In sospeso dalla sessione del 2026-11-27 (da riprendere con Ester):**
 - [ ] **Duetti di papà**: confermati solo *Quella carezza della sera* e *Ti lascerò* (papà e mamma) e
       *La luna e la gatta* (Ester e papà); le altre 18 sono "solo papà" in attesa che Ester segni gli
-      altri duetti. Per cambiarle: 4° elemento nella lista `papa` di `scripts/notion-import.mjs`,
+      altri duetti. Ora si possono sistemare anche dall'app (Modifica canzone → Chi la canta /
+      anche da solo); oppure 4° elemento nella lista `papa` di `scripts/notion-import.mjs`,
       `npm run seed`, `SEED_VERSION` + 1.
-- [ ] **Canzoni di gruppo**: Ester ha chiesto se hanno un bollino a sé. Ora sono 'insieme' + mood "Di gruppo".
-      Proposte in attesa di risposta: (a) escono con qualsiasi combinazione di 2+ persone, (b) quinto
-      bollino "Gruppo", (c) lasciare come ora.
+- [x] **Canzoni di gruppo**: deciso — di tutti, escono con qualsiasi scelta di 2+ persone.
 - [ ] **Artisti incerti**: *Sigarette* (messo Lucio Corsi, titolo di più artisti), *La valigia sul letto*
       e *Domani* (artista vuoto, non trovato), *Iris* (messo Biagio Antonacci; potrebbe essere Goo Goo Dolls).
 - [ ] **"Heaven ("**: riga tagliata nella lista di Ester, non importata: chiedere titolo e artista.
-- [ ] Nessun elenco ancora di canzoni solo di Vale o con altre coppie (es. Vale e mamma): se arrivano,
-      aggiungere una riga in `SINGERS`.
+- [ ] Verificare sui telefoni che le canzoni convertite siano giuste (in particolare quelle con 3 persone,
+      es. *Non vivo più senza te* = Ester, Mamma, Papà, solo Papà: esce anche con "Ester e Papà").
 
 ## Registro decisioni
 - 2026-11-23 — Creato il tema Material (seed `#A8EBF1`) e i token Penpot.
@@ -228,3 +237,8 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
   lista per Maledetta primavera, L'uomo che amava le donne, Senza pietà, Karaoke, Dance monkey; Iris +1.
   Artisti incerti: Sigarette (messo Lucio Corsi), La valigia sul letto e Domani (vuoti), Iris (messo
   Biagio Antonacci). `SEED_VERSION` = 3 (le canzoni mai toccate prendono la versione nuova).
+- 2026-11-27 — Nuovo modello "chi canta" proposto da Ester: ogni canzone ha le persone che la cantano
+  (`people`) e chi la canta anche da solo (`solo`), al posto delle combinazioni. Pesca: una persona →
+  solo le canzoni che canta anche da sola; più persone → canzoni in cui ci sono tutte. Canzoni di gruppo
+  di tutti. Dati vecchi convertiti senza perdite; il formato vecchio (`singers`) resta scritto accanto
+  per i telefoni non ancora aggiornati.

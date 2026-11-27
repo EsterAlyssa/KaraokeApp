@@ -2,7 +2,7 @@ import { Icon } from '../components/Icon';
 import { pool } from '../lib/draw';
 import type { Theme } from '../lib/storage';
 import { statusText, type SyncStatus } from '../lib/sync';
-import { MOODS, PEOPLE, singerFor, singerName, type MoodId, type PersonId, type Song } from '../lib/types';
+import { MOODS, PEOPLE, type MoodId, type PersonId, type Song } from '../lib/types';
 
 const moodIcon = { allegra: 'sun', ballare: 'note', gruppo: 'group' } as const;
 
@@ -24,20 +24,27 @@ export function Home(props: {
   onAdd: () => void;
 }) {
   const { theme, people, moods, onlyOriginal } = props;
-  const singer = singerFor(people);
   const night = theme === 'night';
-  const n = singer ? pool(props.songs, { singer, moods, serata: false, seen: [], onlyOriginal }).length : 0;
+  const n = pool(props.songs, { people, moods, serata: false, seen: [], onlyOriginal }).length;
   const filtered = moods.length > 0 || onlyOriginal;
   const what = n === 1 ? '1 sola canzone' : `${filtered ? '' : 'tutte le '}${n} canzoni`;
   const extra = `${moods.length ? ' con questo mood' : ''}${onlyOriginal ? ' in tonalità originale' : ''}`;
   const poolText =
     people.length === 0
       ? 'Scegli chi canta: anche più di una persona'
-      : !singer
-        ? 'Nessuna canzone per questa combinazione'
-        : n === 0
+      : n === 0
+        ? filtered
           ? 'Nessuna canzone con questa scelta'
-          : `Pesco tra ${what}${extra}`;
+          : 'Nessuna canzone per questa combinazione'
+        : `Pesco tra ${what}${extra}`;
+  // "Ester da sola", "Ester e Vale", "Ester, Mamma e Papà"
+  const chosen = PEOPLE.filter((p) => people.includes(p.id)); // nell'ordine dei bollini
+  const who =
+    chosen.length === 0
+      ? ''
+      : chosen.length === 1
+        ? `${chosen[0].name} ${chosen[0].solo}`
+        : `${chosen.slice(0, -1).map((p) => p.name).join(', ')} e ${chosen[chosen.length - 1].name}`;
 
   const toggleMood = (id: MoodId) =>
     props.onMoods(moods.includes(id) ? moods.filter((m) => m !== id) : [...moods, id]);
@@ -73,7 +80,7 @@ export function Home(props: {
       <section className="stack">
         <div className="row-between">
           <h2 className="h2">Chi canta?</h2>
-          {singer && <span className="muted">{singerName(singer)}</span>}
+          {who && <span className="muted">{who}</span>}
         </div>
         <div className="singers" style={{ gridTemplateColumns: `repeat(${PEOPLE.length}, minmax(0, 1fr))` }}>
           {PEOPLE.map((o) => {

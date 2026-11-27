@@ -3,6 +3,7 @@
 import seed from '../data/seed.json';
 import { today } from './format';
 import { emptyNight, isNight, type NightState } from './night';
+import { normalizeSong, withPeople } from './people';
 import type { Song } from './types';
 
 export type { NightState };
@@ -48,14 +49,16 @@ const SEED_VER_KEY = 'karaoke.seedver.v1';
  *   (titolo, tonalità, date e gradimento restano quelli del telefono).
  */
 export function applySeed(stored: Song[], seedSongs: Song[], now = Date.now()): Song[] {
-  const byId = new Map(stored.map((s) => [s.id, s]));
+  const byId = new Map(stored.map((s) => [s.id, normalizeSong(s)]));
   const same = (a: Song, b: Song) =>
     a.title === b.title &&
     a.artist === b.artist &&
     a.key === b.key &&
-    a.singers.join() === b.singers.join() &&
+    a.people.join() === b.people.join() &&
+    a.solo.join() === b.solo.join() &&
     a.moods.join() === b.moods.join();
-  for (const s of seedSongs) {
+  for (const raw of seedSongs) {
+    const s = normalizeSong(raw);
     const cur = byId.get(s.id);
     if (!cur) {
       byId.set(s.id, s);
@@ -65,24 +68,29 @@ export function applySeed(stored: Song[], seedSongs: Song[], now = Date.now()): 
       if (!same(cur, s)) byId.set(s.id, { ...s, lastSung: cur.lastSung, score: cur.score, updatedAt: now });
       continue;
     }
-    const singers = [...new Set([...cur.singers, ...s.singers])];
+    const people = [...new Set([...cur.people, ...s.people])];
+    const solo = [...new Set([...cur.solo, ...s.solo])];
     const moods = [...new Set([...cur.moods, ...s.moods])];
-    if (singers.length !== cur.singers.length || moods.length !== cur.moods.length) {
-      byId.set(s.id, { ...cur, singers, moods, updatedAt: now });
+    if (people.length !== cur.people.length || solo.length !== cur.solo.length || moods.length !== cur.moods.length) {
+      byId.set(s.id, withPeople({ ...cur, moods, updatedAt: now }, people, solo));
     }
   }
   return [...byId.values()];
 }
+
+/** Canzoni di partenza, nel formato nuovo (il seed è nel formato vecchio, vedi people.ts). */
+const seedSongs = () => (seed as unknown as Song[]).map(normalizeSong);
 
 export function loadSongs(): Song[] {
   const stored = read<Song[]>(SONGS_KEY);
   const ver = read<number>(SEED_VER_KEY) ?? 1;
   if (!stored) {
     write(SEED_VER_KEY, SEED_VERSION);
-    return seed as Song[];
+    return seedSongs();
   }
-  if (ver >= SEED_VERSION) return stored;
-  const updated = applySeed(stored, seed as Song[]);
+  // Le canzoni salvate col formato vecchio passano al nuovo (persone + "anche da solo").
+  if (ver >= SEED_VERSION) return stored.map(normalizeSong);
+  const updated = applySeed(stored, seed as unknown as Song[]);
   write(SONGS_KEY, updated);
   write(SEED_VER_KEY, SEED_VERSION);
   return updated;

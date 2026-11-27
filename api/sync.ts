@@ -32,7 +32,8 @@ function isSong(x: unknown): x is Song {
     typeof s.title === 'string' &&
     typeof s.artist === 'string' &&
     typeof s.key === 'number' &&
-    Array.isArray(s.singers) &&
+    // "Chi canta": formato nuovo (people/solo) e/o vecchio (singers), vedi src/lib/people.ts
+    (Array.isArray(s.singers) || (Array.isArray(s.people) && Array.isArray(s.solo))) &&
     Array.isArray(s.moods) &&
     typeof s.score === 'number'
   );

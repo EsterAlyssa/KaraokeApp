@@ -986,3 +986,11 @@ body {
   box-shadow: none;
   cursor: not-allowed;
 }
+
+.error--inline {
+  margin: 2px 0 0;
+}
+.hint {
+  font-weight: 400;
+  margin: 0;
+}

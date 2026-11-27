@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react';
 import { Chip, TopBar } from '../components/Chip';
 import { Icon } from '../components/Icon';
-import { daysSince, keyText, moodText, relDays, whoText } from '../lib/format';
-import { MOODS, SINGERS, type MoodId, type SingerId, type Song } from '../lib/types';
+import { daysSince, keyText, moodText, relDays } from '../lib/format';
+import { singsFor, whoText } from '../lib/people';
+import { MOODS, PEOPLE, type MoodId, type PersonId, type Song } from '../lib/types';
 
 type Sort = 'old' | 'recent' | 'az';
 const SORTS: [Sort, string][] = [
@@ -25,7 +26,7 @@ export function SongList({
   const [query, setQuery] = useState('');
   const [sort, setSort] = useState<Sort>('old');
   const [open, setOpen] = useState(false);
-  const [fSinger, setFSinger] = useState<SingerId | null>(null);
+  const [fPeople, setFPeople] = useState<PersonId[]>([]);
   const [fMoods, setFMoods] = useState<MoodId[]>([]);
   const [fNever, setFNever] = useState(false);
 
@@ -35,16 +36,16 @@ export function SongList({
     const L = songs.filter(
       (s) =>
         (!q || `${s.title} ${s.artist}`.toLowerCase().includes(q)) &&
-        (!fSinger || s.singers.includes(fSinger)) &&
+        (fPeople.length === 0 || singsFor(s, fPeople)) &&
         (fMoods.length === 0 || fMoods.some((m) => s.moods.includes(m))) &&
         (!fNever || s.lastSung == null),
     );
     if (sort === 'old') return L.sort((a, b) => age(b) - age(a) || a.title.localeCompare(b.title, 'it'));
     if (sort === 'recent') return L.sort((a, b) => (daysSince(a.lastSung) ?? 1e5) - (daysSince(b.lastSung) ?? 1e5));
     return L.sort((a, b) => a.title.localeCompare(b.title, 'it'));
-  }, [songs, query, sort, fSinger, fMoods, fNever]);
+  }, [songs, query, sort, fPeople, fMoods, fNever]);
 
-  const nF = (fSinger ? 1 : 0) + fMoods.length + (fNever ? 1 : 0);
+  const nF = fPeople.length + fMoods.length + (fNever ? 1 : 0);
 
   return (
     <main className="screen screen--bar">
@@ -88,10 +89,14 @@ export function SongList({
         </div>
         {open && (
           <div className="filters">
-            <span className="label">Chi canta</span>
+            <span className="label">Chi canta (come nella pesca)</span>
             <div className="chips">
-              {SINGERS.map((o) => (
-                <Chip key={o.id} selected={fSinger === o.id} onClick={() => setFSinger(fSinger === o.id ? null : o.id)}>
+              {PEOPLE.map((o) => (
+                <Chip
+                  key={o.id}
+                  selected={fPeople.includes(o.id)}
+                  onClick={() => setFPeople(fPeople.includes(o.id) ? fPeople.filter((x) => x !== o.id) : [...fPeople, o.id])}
+                >
                   {o.name}
                 </Chip>
               ))}

@@ -1,4 +1,4 @@
-import { MOODS, SINGERS, type Song } from './types';
+import { MOODS, type Song } from './types';
 
 export const today = () => {
   const d = new Date();
@@ -33,8 +33,6 @@ export function relDays(d: number | null): string {
 
 export const keyText = (k: number) => (k === 0 ? 'Originale' : k > 0 ? `+${k}` : `−${Math.abs(k)}`);
 
-export const whoText = (s: Song) =>
-  s.singers.map((id) => SINGERS.find((x) => x.id === id)?.name ?? id).join(' · ');
 
 export const moodText = (s: Song) =>
   s.moods.map((id) => MOODS.find((x) => x.id === id)?.name ?? id).join(' · ');

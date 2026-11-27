@@ -2,19 +2,21 @@ import { useState } from 'react';
 import { Chip, TopBar } from '../components/Chip';
 import { Icon } from '../components/Icon';
 import { daysSince, keyText, relDays } from '../lib/format';
-import { MOODS, SINGERS, type MoodId, type SingerId, type Song } from '../lib/types';
+import { withPeople } from '../lib/people';
+import { MOODS, PEOPLE, type MoodId, type PersonId, type Song } from '../lib/types';
 
 const toggle = <T,>(arr: T[], v: T) => (arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]);
 
 /** Modulo per una canzone: nuova (senza `initial`) o da modificare (con `initial`). */
 export function AddSong({
   initial,
-  defaultSinger,
+  defaultPeople,
   onBack,
   onSave,
 }: {
   initial?: Song;
-  defaultSinger: SingerId;
+  /** Per una canzone nuova: le persone scelte in home. */
+  defaultPeople: PersonId[];
   onBack: () => void;
   onSave: (s: Song) => void;
 }) {
@@ -22,27 +24,43 @@ export function AddSong({
   const [title, setTitle] = useState(initial?.title ?? '');
   const [artist, setArtist] = useState(initial?.artist ?? '');
   const [key, setKey] = useState(initial?.key ?? 0);
-  const [singers, setSingers] = useState<SingerId[]>(initial?.singers ?? [defaultSinger]);
+  const startPeople = initial?.people ?? (defaultPeople.length ? defaultPeople : ['ester' as PersonId]);
+  const [people, setPeople] = useState<PersonId[]>(startPeople);
+  // Canzone nuova di una persona sola: la canta da sola. Di più persone: di base solo insieme.
+  const [solo, setSolo] = useState<PersonId[]>(initial?.solo ?? (startPeople.length === 1 ? startPeople : []));
   const [moods, setMoods] = useState<MoodId[]>(initial?.moods ?? []);
   const [lastSung, setLastSung] = useState<string | null>(initial?.lastSung ?? null);
   const [err, setErr] = useState(false);
+  const [peopleErr, setPeopleErr] = useState(false);
+
+  const togglePerson = (p: PersonId) => {
+    const next = toggle(people, p);
+    setPeople(next);
+    setPeopleErr(false);
+    // Con una persona sola la canzone è per forza "da sola"; togliendo una persona si toglie anche dai solisti.
+    setSolo(next.length === 1 ? next : solo.filter((x) => next.includes(x)));
+  };
 
   const save = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim()) {
-      setErr(true);
-      return;
-    }
-    onSave({
-      id: initial?.id ?? crypto.randomUUID(),
-      title: title.trim(),
-      artist: artist.trim(),
-      key,
-      singers: singers.length ? singers : ['insieme'],
-      moods,
-      lastSung,
-      score: initial?.score ?? 0,
-    });
+    if (!title.trim()) setErr(true);
+    if (people.length === 0) setPeopleErr(true);
+    if (!title.trim() || people.length === 0) return;
+    onSave(
+      withPeople(
+        {
+          id: initial?.id ?? crypto.randomUUID(),
+          title: title.trim(),
+          artist: artist.trim(),
+          key,
+          moods,
+          lastSung,
+          score: initial?.score ?? 0,
+        },
+        people,
+        people.length === 1 ? people : solo,
+      ),
+    );
   };
 
   return (
@@ -89,15 +107,37 @@ export function AddSong({
         </div>
 
         <div className="field">
-          <span>Chi la canta</span>
-          <div className="chips">
-            {SINGERS.map((o) => (
-              <Chip key={o.id} big selected={singers.includes(o.id)} onClick={() => setSingers(toggle(singers, o.id))}>
+          <span id="who-label">Chi la canta</span>
+          <div className="chips" role="group" aria-labelledby="who-label">
+            {PEOPLE.map((o) => (
+              <Chip key={o.id} big selected={people.includes(o.id)} onClick={() => togglePerson(o.id)}>
                 {o.name}
               </Chip>
             ))}
           </div>
+          {peopleErr && <p className="error error--inline">Scegli almeno una persona</p>}
         </div>
+
+        {people.length > 1 && (
+          <div className="field">
+            <span id="solo-label">
+              Chi la canta anche da solo/a?{' '}
+              <span className="muted optional">nessuno = solo insieme</span>
+            </span>
+            <div className="chips" role="group" aria-labelledby="solo-label">
+              {PEOPLE.filter((o) => people.includes(o.id)).map((o) => (
+                <Chip key={o.id} big selected={solo.includes(o.id)} onClick={() => setSolo(toggle(solo, o.id))}>
+                  {o.name}
+                </Chip>
+              ))}
+            </div>
+            <p className="muted small hint">
+              {solo.length === 0
+                ? 'Esce solo quando scegli tutte queste persone insieme.'
+                : `Esce anche quando scegli solo ${solo.map((p) => PEOPLE.find((x) => x.id === p)?.name).join(' o ')}.`}
+            </p>
+          </div>
+        )}
 
         <div className="field">
           <span>
