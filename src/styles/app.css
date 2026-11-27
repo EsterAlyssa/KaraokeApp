@@ -962,3 +962,21 @@ body {
 .home .btn-glass {
   height: clamp(48px, 7dvh, 62px);
 }
+
+/* "Chi canta?": una colonna per persona; i cerchi si stringono sia in altezza sia in larghezza. */
+.singers {
+  display: grid;
+  gap: 8px;
+}
+.singer__avatar {
+  width: clamp(48px, min(9.5dvh, 17vw), 82px);
+  height: clamp(48px, min(9.5dvh, 17vw), 82px);
+  font-size: clamp(20px, min(3.8dvh, 7vw), 32px);
+}
+.singer__avatar--small {
+  font-size: clamp(14px, min(2.7dvh, 4.6vw), 23px);
+}
+.singer__name {
+  font-size: clamp(14px, min(2.2dvh, 4.2vw), 18px);
+  white-space: nowrap;
+}

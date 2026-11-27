@@ -1,4 +1,5 @@
-export type SingerId = 'ester' | 'mamma' | 'insieme';
+/** insieme = duetto Ester + mamma; vale = duetto Ester + Vale. */
+export type SingerId = 'ester' | 'mamma' | 'insieme' | 'vale';
 export type MoodId = 'allegra' | 'ballare' | 'gruppo';
 
 export interface Song {
@@ -21,6 +22,7 @@ export const SINGERS: { id: SingerId; name: string; ini: string }[] = [
   { id: 'ester', name: 'Ester', ini: 'E' },
   { id: 'mamma', name: 'Mamma', ini: 'M' },
   { id: 'insieme', name: 'Insieme', ini: 'E+M' },
+  { id: 'vale', name: 'Con Vale', ini: 'E+V' },
 ];
 
 export const MOODS: { id: MoodId; name: string }[] = [

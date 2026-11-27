@@ -5,7 +5,8 @@
     "artist": "Lukas Graham",
     "key": 0,
     "singers": [
-      "ester"
+      "ester",
+      "vale"
     ],
     "moods": [],
     "lastSung": null,
@@ -41,7 +42,20 @@
     "artist": "Nek",
     "key": 0,
     "singers": [
-      "insieme"
+      "insieme",
+      "vale"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "alone-in-a-room",
+    "title": "Alone in a room",
+    "artist": "Asking Alexandria",
+    "key": 0,
+    "singers": [
+      "ester"
     ],
     "moods": [],
     "lastSung": null,
@@ -158,6 +172,18 @@
     "score": 0
   },
   {
+    "id": "battle-symphony",
+    "title": "Battle symphony",
+    "artist": "Linkin park",
+    "key": 0,
+    "singers": [
+      "vale"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "beautiful-things",
     "title": "Beautiful things",
     "artist": "Benson Boone",
@@ -188,6 +214,18 @@
     "key": 0,
     "singers": [
       "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "boulevard-of-broken-dreams",
+    "title": "Boulevard of broken dreams",
+    "artist": "Green day",
+    "key": 0,
+    "singers": [
+      "vale"
     ],
     "moods": [],
     "lastSung": null,
@@ -304,6 +342,18 @@
     "score": 0
   },
   {
+    "id": "counting-stars",
+    "title": "Counting stars",
+    "artist": "One Republic",
+    "key": 0,
+    "singers": [
+      "vale"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "crazy-little-thing-called-love",
     "title": "Crazy little thing called love",
     "artist": "Queen",
@@ -331,6 +381,30 @@
     "id": "demons",
     "title": "Demons",
     "artist": "Imagine Dragons",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "direzione-la-vita",
+    "title": "Direzione la vita",
+    "artist": "Annalisa",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "do-i-wanna-know",
+    "title": "Do I wanna know?",
+    "artist": "Arctic Monkeys",
     "key": 0,
     "singers": [
       "ester"
@@ -390,9 +464,33 @@
     "score": 0
   },
   {
+    "id": "drops-of-jupiter",
+    "title": "Drops of Jupiter",
+    "artist": "Train",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "due-vite",
     "title": "Due vite",
     "artist": "Marco Mengoni",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "e-poi",
+    "title": "E poi",
+    "artist": "Giorgia",
     "key": 0,
     "singers": [
       "insieme"
@@ -417,6 +515,18 @@
     "id": "el-mismo-sol",
     "title": "El mismo sol",
     "artist": "Alvaro Soler",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "eppure-sentire",
+    "title": "Eppure sentire",
+    "artist": "Elisa",
     "key": 0,
     "singers": [
       "insieme"
@@ -502,6 +612,18 @@
     "score": 0
   },
   {
+    "id": "fuori-c-e-il-sole",
+    "title": "Fuori c'è il sole",
+    "artist": "Lorenzo Fragola",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "gianna-gianna",
     "title": "Gianna Gianna",
     "artist": "Rino Gaetano",
@@ -519,6 +641,30 @@
     "id": "giovani-wannabe",
     "title": "Giovani wannabe",
     "artist": "PTN",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "gli-ostacoli-del-cuore",
+    "title": "Gli ostacoli del cuore",
+    "artist": "Elisa",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "grande-grande-grande",
+    "title": "Grande, grande, grande",
+    "artist": "Mina",
     "key": 0,
     "singers": [
       "insieme"
@@ -588,6 +734,18 @@
     "score": 0
   },
   {
+    "id": "hoy",
+    "title": "Hoy",
+    "artist": "Gloria Estefan",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "i-don-t-want-to-miss-a-thing",
     "title": "I don't want to miss a thing",
     "artist": "Aerosmith",
@@ -606,6 +764,30 @@
     "key": 0,
     "singers": [
       "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "i-want-it-that-way",
+    "title": "I want it that way",
+    "artist": "Backstreet boys",
+    "key": 0,
+    "singers": [
+      "vale"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "in-the-end",
+    "title": "In the end",
+    "artist": "Linkin park",
+    "key": 0,
+    "singers": [
+      "vale"
     ],
     "moods": [],
     "lastSung": null,
@@ -664,9 +846,57 @@
     "score": 0
   },
   {
+    "id": "knockin-on-heaven-s-door",
+    "title": "Knockin' on heaven's door",
+    "artist": "Guns N' Roses",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "l-italia-di-piero",
+    "title": "L'Italia di Piero",
+    "artist": "Simone Cristicchi",
+    "key": 0,
+    "singers": [
+      "vale"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "l-ombelico-del-mondo",
     "title": "L'ombelico del mondo",
     "artist": "Jovanotti",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "la-camisa-negra",
+    "title": "La camisa negra",
+    "artist": "Juanes",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "la-cintura",
+    "title": "La cintura",
+    "artist": "Alvaro Soler",
     "key": 0,
     "singers": [
       "insieme"
@@ -725,9 +955,105 @@
     "score": 0
   },
   {
+    "id": "la-vie-en-rose",
+    "title": "La vie en rose",
+    "artist": "Louis Armstrong",
+    "key": -5,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "la-voce-del-silenzio",
+    "title": "La voce del silenzio",
+    "artist": "Mina",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "lascia-che-io-sia",
+    "title": "Lascia che io sia",
+    "artist": "Nek",
+    "key": 0,
+    "singers": [
+      "vale"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "lascia-stare",
+    "title": "Lascia stare",
+    "artist": "Biagio Antonacci",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "laura-non-c-e",
+    "title": "Laura non c'è",
+    "artist": "Nek",
+    "key": 0,
+    "singers": [
+      "vale"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "le-tasche-piene-di-sassi",
+    "title": "Le tasche piene di sassi",
+    "artist": "Jovanotti",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "libre",
+    "title": "Libre",
+    "artist": "Alvaro Soler",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "long-live-rock-and-roll",
     "title": "Long live rock and roll",
     "artist": "Daughtry",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "losing-my-religion",
+    "title": "Losing my religion",
+    "artist": "R.E.M.",
     "key": 0,
     "singers": [
       "ester"
@@ -743,6 +1069,30 @@
     "key": 0,
     "singers": [
       "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "luce-tramonti-a-nord-est",
+    "title": "Luce (tramonti a nord est)",
+    "artist": "Elisa",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "luce-che-entra",
+    "title": "Luce che entra",
+    "artist": "Lorenzo Fragola",
+    "key": 0,
+    "singers": [
+      "insieme"
     ],
     "moods": [],
     "lastSung": null,
@@ -779,6 +1129,30 @@
     "title": "Malavita",
     "artist": "Comacose",
     "key": -2,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "maledetta-primavera",
+    "title": "Maledetta primavera",
+    "artist": "Loretta Goggi",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "mary",
+    "title": "Mary",
+    "artist": "Gemelli Diversi",
+    "key": 0,
     "singers": [
       "insieme"
     ],
@@ -947,6 +1321,18 @@
     "score": 0
   },
   {
+    "id": "neve",
+    "title": "Neve",
+    "artist": "Mina",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "non-litighiamo-piu",
     "title": "Non litighiamo più",
     "artist": "Rocco Hunt",
@@ -971,12 +1357,48 @@
     "score": 0
   },
   {
+    "id": "non-vivo-piu-senza-te",
+    "title": "Non vivo più senza te",
+    "artist": "Biagio Antonacci",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "numb",
+    "title": "Numb",
+    "artist": "Linkin park",
+    "key": -1,
+    "singers": [
+      "vale"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "oggi-sono-io",
     "title": "Oggi sono io",
     "artist": "Alex Britti",
     "key": 0,
     "singers": [
       "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "oh-love",
+    "title": "Oh love",
+    "artist": "Green Day",
+    "key": 0,
+    "singers": [
+      "ester"
     ],
     "moods": [],
     "lastSung": null,
@@ -1092,6 +1514,30 @@
     "score": 0
   },
   {
+    "id": "perfect",
+    "title": "Perfect",
+    "artist": "Ed Sheeran",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "photograph",
+    "title": "Photograph",
+    "artist": "Ed Sheeran",
+    "key": 3,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "piazza-san-marco",
     "title": "Piazza San Marco",
     "artist": "Annalisa e Marco Mengoni",
@@ -1172,6 +1618,18 @@
     "key": 0,
     "singers": [
       "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "ringo-star",
+    "title": "Ringo star",
+    "artist": "PTN",
+    "key": 0,
+    "singers": [
+      "vale"
     ],
     "moods": [],
     "lastSung": null,
@@ -1264,6 +1722,30 @@
     "score": 0
   },
   {
+    "id": "se-e-vero-che-ci-sei",
+    "title": "Se è vero che ci sei",
+    "artist": "Biagio Antonacci",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "se-telefonando",
+    "title": "Se telefonando",
+    "artist": "Mina",
+    "key": 0,
+    "singers": [
+      "insieme"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "senza-fare-sul-serio",
     "title": "Senza fare sul serio",
     "artist": "Malika Ayane",
@@ -1304,6 +1786,18 @@
     "title": "Seven nation army",
     "artist": "The white stripes",
     "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "shape-of-you",
+    "title": "Shape of you",
+    "artist": "Ed Sheeran",
+    "key": 5,
     "singers": [
       "ester"
     ],
@@ -1486,6 +1980,18 @@
     "score": 0
   },
   {
+    "id": "undisclosed-desires",
+    "title": "Undisclosed desires",
+    "artist": "Muse",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "urlando-contro-il-cielo",
     "title": "Urlando contro il cielo",
     "artist": "Ligabue",
@@ -1584,6 +2090,55 @@
     "score": 0
   },
   {
+    "id": "vorrei-cantare-come-biagio-antonacci",
+    "title": "Vorrei cantare come Biagio Antonacci",
+    "artist": "Simone Cristicchi",
+    "key": 0,
+    "singers": [
+      "vale"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "wake-me-up",
+    "title": "Wake me up",
+    "artist": "Aloe Blacc",
+    "key": 0,
+    "singers": [
+      "vale",
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "wicked-game",
+    "title": "Wicked game",
+    "artist": "Stone Sour",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "wolf-in-sheep-s-clothing",
+    "title": "Wolf in sheep's clothing",
+    "artist": "Set it off",
+    "key": -2,
+    "singers": [
+      "vale"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
     "id": "wonderwall",
     "title": "Wonderwall",
     "artist": "Oasis",
@@ -1613,6 +2168,18 @@
     "id": "you-will-never-know",
     "title": "You will never know",
     "artist": "Imany",
+    "key": 0,
+    "singers": [
+      "ester"
+    ],
+    "moods": [],
+    "lastSung": null,
+    "score": 0
+  },
+  {
+    "id": "you-re-not-alone",
+    "title": "You're not alone",
+    "artist": "Mads Langer",
     "key": 0,
     "singers": [
       "ester"

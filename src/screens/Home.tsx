@@ -66,7 +66,7 @@ export function Home(props: {
 
       <section className="stack">
         <h2 className="h2">Chi canta?</h2>
-        <div className="grid3">
+        <div className="singers" style={{ gridTemplateColumns: `repeat(${SINGERS.length}, minmax(0, 1fr))` }}>
           {SINGERS.map((o) => {
             const sel = singer === o.id;
             return (

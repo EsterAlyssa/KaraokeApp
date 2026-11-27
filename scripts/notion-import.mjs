@@ -6,7 +6,10 @@
 //   "Mie"        -> ester
 //   "Solo mamma" -> mamma
 //   "Di gruppo"  -> insieme + mood "gruppo"
-// Le canzoni presenti in più liste vengono unite (stesso titolo).
+//   "Vale"       -> vale (duetti di Ester con Vale), esportata il 2026-11-27
+// Più due "liste vecchie" incollate da Ester il 2026-11-27 (vedi sotto: vecchieInsieme, vecchieMie).
+// Le canzoni presenti in più liste vengono unite (stesso titolo); la tonalità resta quella
+// della prima lista che la contiene (le liste Notion vengono prima: sono le più aggiornate).
 // Formato: [titolo, artista, tonalità], copiati tali e quali da Notion.
 import { writeFileSync } from 'node:fs';
 
@@ -160,6 +163,47 @@ const diGruppo = [
   ["Funky Gallo", "Zucchero", 0],
 ];
 
+// Notion › Karaoke › Vale ("Canzoni con Vale"), tali e quali.
+const vale = [
+  ["7 years", "Lukas Graham", 0], ["Almeno stavolta", "Nek", 0], ["Battle symphony", "Linkin park", 0],
+  ["Boulevard of broken dreams", "Green day", 0], ["Counting stars", "One Republic", 0],
+  ["I want it that way", "Backstreet boys", 0], ["In the end", "Linkin park", 0],
+  ["L'Italia di Piero", "Simone Cristicchi", 0], ["Lascia che io sia", "Nek", 0], ["Laura non c'è", "Nek", 0],
+  ["Numb", "Linkin park", -1], ["Ringo star", "PTN", 0],
+  ["Vorrei cantare come Biagio Antonacci", "Simone Cristicchi", 0], ["Wake me up", "Aloe Blacc", 0],
+  ["Wolf in sheep's clothing", "Set it off", -2],
+];
+
+// Lista vecchia di Ester con la mamma (duetti -> insieme). Solo le canzoni che non erano già
+// in "Con mamma"; artisti corretti dove la lista li dava sbagliati o mancanti.
+// L'elenco incollato si interrompeva a "Mina - La voce d…": completato in "La voce del silenzio".
+const vecchieInsieme = [
+  ["Mary", "Gemelli Diversi", 0],
+  ["Libre", "Alvaro Soler", 0], ["La cintura", "Alvaro Soler", 0],
+  ["Direzione la vita", "Annalisa", 0],
+  ["Se è vero che ci sei", "Biagio Antonacci", 0], ["Non vivo più senza te", "Biagio Antonacci", 0],
+  ["Lascia stare", "Biagio Antonacci", 0],
+  ["Luce (tramonti a nord est)", "Elisa", 0], ["Gli ostacoli del cuore", "Elisa", 0], ["Eppure sentire", "Elisa", 0],
+  ["Le tasche piene di sassi", "Jovanotti", 0], ["E poi", "Giorgia", 0],
+  ["Hoy", "Gloria Estefan", 0], ["La camisa negra", "Juanes", 0],
+  ["Maledetta primavera", "Loretta Goggi", 0],
+  ["Fuori c'è il sole", "Lorenzo Fragola", 0], ["Luce che entra", "Lorenzo Fragola", 0],
+  ["Neve", "Mina", 0], ["Grande, grande, grande", "Mina", 0], ["Se telefonando", "Mina", 0],
+  ["La voce del silenzio", "Mina", 0],
+];
+
+// Liste vecchie solo di Ester. Solo le canzoni che non erano già in "Mie"
+// (per quelle già presenti vale la tonalità del database). "Heaven (" era tagliata: esclusa.
+const vecchieMie = [
+  ["Photograph", "Ed Sheeran", 3], ["Shape of you", "Ed Sheeran", 5], ["Perfect", "Ed Sheeran", 0],
+  ["La vie en rose", "Louis Armstrong", -5],
+  ["Undisclosed desires", "Muse", 0], ["Wake me up", "Avicii ft. Aloe Blacc", 0],
+  ["You're not alone", "Mads Langer", 0], ["Do I wanna know?", "Arctic Monkeys", 0],
+  ["Knockin' on heaven's door", "Guns N' Roses", 0], ["Wicked game", "Stone Sour", 0],
+  ["Alone in a room", "Asking Alexandria", 0], ["Drops of Jupiter", "Train", 0],
+  ["Oh love", "Green Day", 0], ["Losing my religion", "R.E.M.", 0],
+];
+
 const slug = (s) =>
   s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
@@ -178,6 +222,9 @@ add(conMamma, 'insieme');
 add(mie, 'ester');
 add(soloMamma, 'mamma');
 add(diGruppo, 'insieme', 'gruppo');
+add(vale, 'vale');
+add(vecchieInsieme, 'insieme');
+add(vecchieMie, 'ester');
 
 const out = [...songs.values()].sort((a, b) => a.title.localeCompare(b.title, 'it'));
 writeFileSync(new URL('../src/data/seed.json', import.meta.url), JSON.stringify(out, null, 2) + '\n');

@@ -33,7 +33,7 @@ di chi canta, dell'atmosfera e di cosa si è cantato di recente.
 | Mockup interattivo (canvas Design) | https://claude.ai/artifact/MRqQUyhtPGPqzRv4C3xhd5 — artboard `Main.dc.html` (tema giorno) e `Notte.dc.html` (tema notte), 390×844 |
 | Tema colori Material (export Material Theme Builder, seed `#A8EBF1`) | `design/material-theme.json` |
 | Token colore per Penpot (palette tonali + schemi) | `design/penpot-tokens.json` |
-| Canzoni originali (fonte dell'import) | Notion › Karaoke › *Con mamma*, *Mie*, *Solo mamma*, *Di gruppo* (*Vale* esclusa) |
+| Canzoni originali (fonte dell'import) | Notion › Karaoke › *Con mamma*, *Mie*, *Solo mamma*, *Di gruppo*, *Vale* + due liste vecchie incollate da Ester (tutto in `scripts/notion-import.mjs`). Papà non ha ancora una lista. |
 | App online (Vercel) | progetto `karaoke-di-casa` nel team *esteralyssas-projects*, collegato a GitHub: **ogni push su `main` pubblica da solo** |
 
 Il mockup è il riferimento per l'aspetto; il comportamento vero ora sta nel codice.
@@ -62,6 +62,10 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
   `npm run theme`. Le sfumature (vetro, ombre, sfondi) sono derivate in `app.css` con `color-mix`.
 - **Dati:** salvati sul telefono in localStorage (`karaoke.songs.v1`). Al primo avvio si
   parte da `src/data/seed.json`. L'app funziona sempre offline; la sync è un di più.
+- **Aggiungere canzoni al seed** (es. nuove liste): modificare `scripts/notion-import.mjs`, `npm run seed`,
+  e **aumentare `SEED_VERSION`** in `src/lib/storage.ts`. All'apertura i telefoni già in uso ricevono le
+  canzoni nuove e i cantanti/mood nuovi delle canzoni esistenti (`applySeed`, con `updatedAt` aggiornato
+  così la sync le propaga); titoli, tonalità, date e gradimento già sul telefono non vengono toccati.
 - **Sync tra i telefoni:**
   - Server: `api/sync.ts` su Vercel. Nel Blob store **privato** `karaoke-canzoni` (team
     esteralyssas-projects, regione iad1) salva due file JSON: `karaoke/songs.json` (canzoni) e
@@ -112,7 +116,7 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 { id,       // stringa (slug del titolo per le canzoni importate, UUID per le nuove)
   title, artist,
   key,      // tonalità: intero rispetto all'originale (0 = Originale, −2, +1…)
-  singers,  // ['ester' | 'mamma' | 'insieme']
+  singers,  // ['ester' | 'mamma' | 'insieme' (Ester+mamma) | 'vale' (Ester+Vale, "Con Vale")]
   moods,    // ['allegra' | 'ballare' | 'gruppo']
   lastSung, // data ultima volta cantata 'YYYY-MM-DD', null = mai cantata
   score,    // gradimento: +1 quando si canta, −1 quando si scarta
@@ -121,7 +125,9 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 
 ## Regole di pesca (decise)
 - Filtra per cantante scelto; i **mood si combinano in OR** (basta che la canzone ne abbia uno).
-- **Insieme** = canzoni da cantare in due.
+- **Insieme** = duetti di Ester con la mamma. **Con Vale** = duetti di Ester con Vale.
+- "Chi canta?" mostra una colonna per persona (`SINGERS` in `src/lib/types.ts`): i cerchi si stringono
+  in altezza e in larghezza. Con 4 persone la home sta ancora in 375×600.
 - **Modalità serata** attiva di default: niente ripetizioni nella stessa serata
   (cantate e scartate non tornano).
 - Pescata casuale pesata: peso = `max(0.5, 3 + score) × (1 + min(giorni, 90) / 30)`.
@@ -188,3 +194,8 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
   pulsanti Lista/Aggiungi risultavano tagliati), la pagina non scorre più.
 - 2026-11-27 — Nuova icona "duetto di dadi" (mix delle 3 proposte: microfono + due voci + dado),
   con la nota musicale al posto del cuore.
+- 2026-11-27 — Aggiunte le canzoni di Vale (Notion, 15, cantante nuovo "Con Vale" = duetti Ester+Vale)
+  e due liste vecchie di Ester (duetti con la mamma + solo sue): 180 canzoni in tutto (+47). Doppioni uniti,
+  tonalità del database tenute, artisti corretti per le liste vecchie (es. Le tasche piene di sassi →
+  Jovanotti, La camisa negra → Juanes, Mary → Gemelli Diversi). Esclusa "Heaven (" (riga tagliata).
+  Papà: nessuna lista su Notion, non aggiunto. `SEED_VERSION` = 2.

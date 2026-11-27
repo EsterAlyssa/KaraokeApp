@@ -29,7 +29,50 @@ function write(key: string, value: unknown) {
   }
 }
 
-export const loadSongs = (): Song[] => read<Song[]>(SONGS_KEY) ?? (seed as Song[]);
+/**
+ * Versione delle canzoni di partenza (src/data/seed.json). Va aumentata ogni volta che si
+ * aggiungono canzoni o cantanti al seed: i telefoni già in uso le ricevono all'apertura.
+ *   1 = import iniziale da Notion (133 canzoni)
+ *   2 = + lista Vale e liste vecchie di Ester (180 canzoni, cantante "Con Vale")
+ */
+export const SEED_VERSION = 2;
+const SEED_VER_KEY = 'karaoke.seedver.v1';
+
+/**
+ * Porta le novità del seed in un elenco già in uso, senza toccare quello che c'è:
+ * le canzoni nuove vengono aggiunte, a quelle esistenti si aggiungono solo cantanti e mood nuovi
+ * (titolo, tonalità, date e gradimento restano quelli del telefono).
+ */
+export function applySeed(stored: Song[], seedSongs: Song[], now = Date.now()): Song[] {
+  const byId = new Map(stored.map((s) => [s.id, s]));
+  for (const s of seedSongs) {
+    const cur = byId.get(s.id);
+    if (!cur) {
+      byId.set(s.id, s);
+      continue;
+    }
+    const singers = [...new Set([...cur.singers, ...s.singers])];
+    const moods = [...new Set([...cur.moods, ...s.moods])];
+    if (singers.length !== cur.singers.length || moods.length !== cur.moods.length) {
+      byId.set(s.id, { ...cur, singers, moods, updatedAt: now });
+    }
+  }
+  return [...byId.values()];
+}
+
+export function loadSongs(): Song[] {
+  const stored = read<Song[]>(SONGS_KEY);
+  const ver = read<number>(SEED_VER_KEY) ?? 1;
+  if (!stored) {
+    write(SEED_VER_KEY, SEED_VERSION);
+    return seed as Song[];
+  }
+  if (ver >= SEED_VERSION) return stored;
+  const updated = applySeed(stored, seed as Song[]);
+  write(SONGS_KEY, updated);
+  write(SEED_VER_KEY, SEED_VERSION);
+  return updated;
+}
 export const saveSongs = (songs: Song[]) => write(SONGS_KEY, songs);
 
 /** Lo stato della serata vale solo per oggi: il giorno dopo si riparte da zero. */
