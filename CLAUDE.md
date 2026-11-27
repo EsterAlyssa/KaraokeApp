@@ -168,13 +168,27 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
 - [x] Canzoni importate da Notion (133).
 - [x] Hosting su **Vercel** (deploy automatico da GitHub).
 - [x] **Sync gratuita** tra i 2 telefoni (Vercel Blob privato + codice famiglia).
-- [ ] Impostare `FAMILY_CODE` su Vercel e inserire lo stesso codice sui due telefoni.
+- [x] Impostare `FAMILY_CODE` su Vercel e inserire lo stesso codice sui due telefoni.
 - [x] Modificare una canzone dalla lista.
 - [ ] Eliminare una canzone (con la sync serve una "lapide": segnarla come eliminata, non toglierla).
 - [x] Sync verificata tra i due telefoni (2026-11-27): pallino verde.
 - [ ] Assegnare i mood alle canzoni importate (da Notion arriva solo "Di gruppo").
 - [ ] Sistemare i refusi nei titoli/artisti presi da Notion (es. "Che to dico a fa",
       "Ossesione", "Comacose", "Boombadash", "Malika Ayanne"): importati tali e quali.
+
+**In sospeso dalla sessione del 2026-11-27 (da riprendere con Ester):**
+- [ ] **Duetti di papà**: confermati solo *Quella carezza della sera* e *Ti lascerò* (papà e mamma) e
+      *La luna e la gatta* (Ester e papà); le altre 18 sono "solo papà" in attesa che Ester segni gli
+      altri duetti. Per cambiarle: 4° elemento nella lista `papa` di `scripts/notion-import.mjs`,
+      `npm run seed`, `SEED_VERSION` + 1.
+- [ ] **Canzoni di gruppo**: Ester ha chiesto se hanno un bollino a sé. Ora sono 'insieme' + mood "Di gruppo".
+      Proposte in attesa di risposta: (a) escono con qualsiasi combinazione di 2+ persone, (b) quinto
+      bollino "Gruppo", (c) lasciare come ora.
+- [ ] **Artisti incerti**: *Sigarette* (messo Lucio Corsi, titolo di più artisti), *La valigia sul letto*
+      e *Domani* (artista vuoto, non trovato), *Iris* (messo Biagio Antonacci; potrebbe essere Goo Goo Dolls).
+- [ ] **"Heaven ("**: riga tagliata nella lista di Ester, non importata: chiedere titolo e artista.
+- [ ] Nessun elenco ancora di canzoni solo di Vale o con altre coppie (es. Vale e mamma): se arrivano,
+      aggiungere una riga in `SINGERS`.
 
 ## Registro decisioni
 - 2026-11-23 — Creato il tema Material (seed `#A8EBF1`) e i token Penpot.
