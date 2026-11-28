@@ -19,7 +19,7 @@ import { normalizeSong } from './lib/people';
 import type { MoodId, PersonId, Song } from './lib/types';
 import { Home } from './screens/Home';
 import { Draw, type DrawPhase } from './screens/Draw';
-import { SongList } from './screens/SongList';
+import { SongList, type ListView } from './screens/SongList';
 import { AddSong } from './screens/AddSong';
 import { SyncSettings } from './screens/SyncSettings';
 
@@ -41,6 +41,10 @@ export default function App() {
   const [phase, setPhase] = useState<DrawPhase>('card');
   const [toast, setToast] = useState('');
   const [editId, setEditId] = useState<string | null>(null);
+  /** Come era la lista prima di aprire Modifica/Aggiungi; si azzera tornando in home. */
+  const listView = useRef<ListView | null>(null);
+  /** Canzone appena modificata/aggiunta, da mostrare quando si torna alla lista. */
+  const [focusId, setFocusId] = useState<string | null>(null);
   const toastTimer = useRef<number | undefined>(undefined);
 
   // ---- sync ----
@@ -155,12 +159,14 @@ export default function App() {
 
   const addSong = (song: Song) => {
     setSongs((list) => [...list, { ...song, updatedAt: Date.now() }]);
+    setFocusId(song.id);
     setScreen('list');
     showToast(`Aggiunta: ${song.title}`);
   };
 
   const editSong = (song: Song) => {
     setSongs((list) => list.map((s) => (s.id === song.id ? { ...song, updatedAt: Date.now() } : s)));
+    setFocusId(song.id);
     setScreen('list');
     showToast(`Modificata: ${song.title}`);
   };
@@ -223,10 +229,17 @@ export default function App() {
       {screen === 'list' && (
         <SongList
           songs={songs}
-          onBack={() => setScreen('home')}
+          saved={listView}
+          focusId={focusId}
+          onBack={() => {
+            listView.current = null;
+            setFocusId(null);
+            setScreen('home');
+          }}
           onAdd={() => setScreen('add')}
           onEdit={(id) => {
             setEditId(id);
+            setFocusId(id);
             setScreen('edit');
           }}
         />
@@ -242,7 +255,13 @@ export default function App() {
         />
       )}
 
-      {screen === 'add' && <AddSong defaultPeople={people} onBack={() => setScreen('home')} onSave={addSong} />}
+      {screen === 'add' && (
+        <AddSong
+          defaultPeople={people}
+          onBack={() => setScreen(listView.current ? 'list' : 'home')}
+          onSave={addSong}
+        />
+      )}
 
       {screen === 'sync' && (
         <SyncSettings
