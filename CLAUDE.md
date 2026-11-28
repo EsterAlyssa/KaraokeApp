@@ -107,7 +107,9 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
    chi canta). Swipe/pulsanti: *Si canta!* oppure scarta e *Pesca la prossima*.
    Stato vuoto: "Finite le canzoni" → *Cambia filtri* / *Ricomincia la serata*.
 3. **Le canzoni** — elenco con ricerca, filtri (cantante, mood, "mai cantata") e
-   ordinamento (da più tempo / più recenti / A–Z).
+   ordinamento (da più tempo / più recenti / A–Z). Dopo Modifica o Aggiungi la lista torna com'era
+   (scorrimento, ricerca, filtri, ordine; se la canzone toccata non si vede, ci scorre sopra).
+   Tornando in home la lista riparte da capo.
 4. **Nuova canzone** — titolo, artista, tonalità, chi la canta, mood → *Salva canzone*.
 5. **Modifica canzone** — si apre toccando una canzone in *Le canzoni*; stesso modulo già compilato,
    in più "Segna come mai cantata". Tonalità da −12 a +12. "Chi la canta": bollini persona (anche più
@@ -242,3 +244,5 @@ Comandi: `npm install`, `npm run dev` (http://localhost:5173), `npm run build`.
   solo le canzoni che canta anche da sola; più persone → canzoni in cui ci sono tutte. Canzoni di gruppo
   di tutti. Dati vecchi convertiti senza perdite; il formato vecchio (`singers`) resta scritto accanto
   per i telefoni non ancora aggiornati.
+- 2026-11-28 — *Le canzoni* ricorda la posizione: dopo aver modificato (o aggiunto) una canzone si torna
+  allo stesso punto della lista, con ricerca e filtri invariati (richiesta di Ester).

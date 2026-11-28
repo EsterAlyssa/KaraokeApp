@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type MutableRefObject } from 'react';
 import { Chip, TopBar } from '../components/Chip';
 import { Icon } from '../components/Icon';
 import { daysSince, keyText, moodText, relDays } from '../lib/format';
@@ -6,6 +6,17 @@ import { singsFor, whoText } from '../lib/people';
 import { MOODS, PEOPLE, type MoodId, type PersonId, type Song } from '../lib/types';
 
 type Sort = 'old' | 'recent' | 'az';
+
+/** Come era la lista (ricerca, filtri, ordine, scorrimento): si ritrova dopo Modifica/Aggiungi. */
+export type ListView = {
+  query: string;
+  sort: Sort;
+  open: boolean;
+  fPeople: PersonId[];
+  fMoods: MoodId[];
+  fNever: boolean;
+  scrollTop: number;
+};
 const SORTS: [Sort, string][] = [
   ['old', 'Da più tempo'],
   ['recent', 'Recenti'],
@@ -17,18 +28,46 @@ export function SongList({
   onBack,
   onAdd,
   onEdit,
+  saved,
+  focusId,
 }: {
   songs: Song[];
   onBack: () => void;
   onAdd: () => void;
   onEdit: (id: string) => void;
+  /** Dove ricordare come era la lista quando si esce (null = lista da capo). */
+  saved: MutableRefObject<ListView | null>;
+  /** Canzone appena modificata o aggiunta: se non si vede, la lista ci scorre sopra. */
+  focusId?: string | null;
 }) {
-  const [query, setQuery] = useState('');
-  const [sort, setSort] = useState<Sort>('old');
-  const [open, setOpen] = useState(false);
-  const [fPeople, setFPeople] = useState<PersonId[]>([]);
-  const [fMoods, setFMoods] = useState<MoodId[]>([]);
-  const [fNever, setFNever] = useState(false);
+  const v = saved.current;
+  const [query, setQuery] = useState(v?.query ?? '');
+  const [sort, setSort] = useState<Sort>(v?.sort ?? 'old');
+  const [open, setOpen] = useState(v?.open ?? false);
+  const [fPeople, setFPeople] = useState<PersonId[]>(v?.fPeople ?? []);
+  const [fMoods, setFMoods] = useState<MoodId[]>(v?.fMoods ?? []);
+  const [fNever, setFNever] = useState(v?.fNever ?? false);
+  const listRef = useRef<HTMLDivElement>(null);
+  const scrollTop = useRef(v?.scrollTop ?? 0);
+
+  // Salvo lo stato a ogni cambio (lo scorrimento lo segue onScroll).
+  useEffect(() => {
+    saved.current = { query, sort, open, fPeople, fMoods, fNever, scrollTop: scrollTop.current };
+  }, [saved, query, sort, open, fPeople, fMoods, fNever]);
+
+  // All'apertura: torno dov'ero; se la canzone toccata non si vede (es. l'ordine è cambiato), ci vado.
+  useLayoutEffect(() => {
+    const el = listRef.current;
+    if (!el) return;
+    el.scrollTop = scrollTop.current;
+    const card = focusId ? el.querySelector<HTMLElement>(`[data-id="${CSS.escape(focusId)}"]`) : null;
+    if (card) {
+      const box = el.getBoundingClientRect();
+      const r = card.getBoundingClientRect();
+      if (r.top < box.top || r.bottom > box.bottom) card.scrollIntoView({ block: 'center' });
+      card.focus({ preventScroll: true });
+    }
+  }, []);
 
   const list = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -120,7 +159,14 @@ export function SongList({
         )}
       </div>
 
-      <div className="list">
+      <div
+        className="list"
+        ref={listRef}
+        onScroll={(e) => {
+          scrollTop.current = e.currentTarget.scrollTop;
+          if (saved.current) saved.current.scrollTop = scrollTop.current;
+        }}
+      >
         <p className="muted small">
           {list.length === songs.length ? `${songs.length} canzoni` : `${list.length} di ${songs.length} canzoni`}
         </p>
@@ -129,6 +175,7 @@ export function SongList({
           return (
             <button
               key={s.id}
+              data-id={s.id}
               type="button"
               className="song glass"
               aria-label={`Modifica ${s.title}${s.artist ? `, ${s.artist}` : ''}`}
